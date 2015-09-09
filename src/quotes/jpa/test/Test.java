@@ -6,8 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
 import quotes.jpa.entities.Quotation;
 import quotes.jpa.entities.User;
+import quotes.jpa.manipulation.SearchService;
 
 public class Test
 {
@@ -36,6 +39,23 @@ public class Test
             for (Quotation qq:l){
             	System.out.println(qq.getQuoteText());
             }
+            FileSystemXmlApplicationContext context=new FileSystemXmlApplicationContext("WebContent/WEB-INF/JPA.xml");
+            SearchService ss = context.getBean(SearchService.class);
+         
+            List<Quotation> l2= ss.findQuotesByAuthor("Kierkegaard");
+            
+            List<Quotation> l3= ss.findQuotesByAuthor("Atwood");
+            if (l2!=null)
+            for(Quotation qt:l2){
+            	System.out.println(qt.getQuoteText());
+            }
+            if (l3!=null)
+            for(Quotation qt:l3){
+            	System.out.println(qt.getQuoteText());
+            }
+            
+            
+            
 //            Quotation q2 = new Quotation();
 //            q2.authorID=1;
 //            q2.quoteText="The truth is a trap: you can not get it without it getting you; you cannot get the truth by capturing it, only by its capturing you.";

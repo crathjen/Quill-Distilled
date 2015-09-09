@@ -33,15 +33,15 @@
         value="org.apache.derby.jdbc.ClientDriver"
       />
       <property name="eclipselink.logging.level" value="WARNING"/>
-      <property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
-      <property 
-        name="openjpa.Compatibility" 
-        value="QuotedNumbersInQueries=true"
-      />
-      <property 
-        name="openjpa.Log" 
-        value="DefaultLevel=ERROR, Runtime=WARN, Tool=WARN"
-      />
+<!--       <property name="openjpa.RuntimeUnenhancedClasses" value="supported"/> -->
+<!--       <property  -->
+<!--         name="openjpa.Compatibility"  -->
+<!--         value="QuotedNumbersInQueries=true" -->
+<!--       /> -->
+<!--       <property  -->
+<!--         name="openjpa.Log"  -->
+<!--         value="DefaultLevel=ERROR, Runtime=WARN, Tool=WARN" -->
+<!--       /> -->
     </properties>
     
   </persistence-unit>
