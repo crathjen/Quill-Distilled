@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Quotation {
+
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -28,6 +30,18 @@ public class Quotation {
 	@OneToMany(mappedBy="quotation")
 	private List<UserQuoteRating> ratings;
 	
+	@ManyToOne
+	@JoinColumn(name="q_source")
+	private QuoteSource quoteSource;
+	
+
+	public QuoteSource getQuoteSource() {
+		return quoteSource;
+	}
+
+	public void setQuoteSource(QuoteSource quoteSource) {
+		this.quoteSource = quoteSource;
+	}
 
 	@ManyToOne
 	@JoinColumn(name="posting_user")
@@ -35,8 +49,6 @@ public class Quotation {
 	
 	@ManyToMany(mappedBy="taggedQuotes")
 	private List<SubjectTag> tags;
-	
-	
 	
 	public int getId() {
 		return id;
@@ -69,7 +81,18 @@ public class Quotation {
 	public void setPostingUser(User postingUser) {
 		this.postingUser = postingUser;
 	}
+	public List<SubjectTag> getTags() {
+		return tags;
+	}
 
+	public void setTags(List<SubjectTag> tags) {
+		this.tags = tags;
+		for (SubjectTag t:tags){
+			t.addTaggedQuote(this);
+		}
+	}
+	
+	
 	
 	
 	

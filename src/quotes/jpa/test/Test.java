@@ -8,6 +8,8 @@ import javax.persistence.Persistence;
 
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
+import quotes.jpa.daos.AuthorDAO;
+import quotes.jpa.entities.Author;
 import quotes.jpa.entities.Quotation;
 import quotes.jpa.entities.User;
 import quotes.jpa.manipulation.SearchService;
@@ -53,10 +55,32 @@ public class Test
             for(Quotation qt:l3){
             	System.out.println(qt.getQuoteText());
             }
+               
+            
+            Quotation q2 = new Quotation();
+            Author a = new Author();
+            a.setFirstName("Chimamanda Ngozi");
+            a.setLastName("Adichi");
+            a=context.getBean(AuthorDAO.class).authorExists(a);
+            System.out.println(a.getId());
             
             
             
-//            Quotation q2 = new Quotation();
+//            q2.setQuoteText("We spend too much time teaching girls to worry about what boys think of them. But the reverse is not the case. We don’t teach boys to care about being likable. We spend too much time telling girls that they cannot be angry or aggressive or tough, which is bad enough, but then we turn around and either praise or excuse men for the same reasons. All over the world, there are so many magazine articles and books telling women what to do, how to be and not to be, in order to attract or please men. There are far fewer guides for men about pleasing women.");
+//            //System.out.println(q2.getAuthor().getId());
+//            try {
+//            	em.getTransaction().begin();
+//            	a=context.getBean(AuthorDAO.class).authorExists(a);
+//                q2.setAuthor(a);
+//            	em.merge(q2.getAuthor());
+//            	em.persist(q2);
+//            	em.getTransaction().commit();
+//				System.out.println("Successfully added quote");
+//			} catch (Exception e) {
+//				em.getTransaction().rollback();
+//				System.out.println("Rolled Back");
+//			}
+//           
 //            q2.authorID=1;
 //            q2.quoteText="The truth is a trap: you can not get it without it getting you; you cannot get the truth by capturing it, only by its capturing you.";
 //            em.getTransaction().begin();

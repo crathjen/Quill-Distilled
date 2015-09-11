@@ -21,6 +21,59 @@ public class SubjectTag {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTagText() {
+		return tagText;
+	}
+
+	public void setTagText(String tagText) {
+		this.tagText = tagText;
+	}
+
+	public User getCreatingUser() {
+		return creatingUser;
+	}
+
+	public void setCreatingUser(User creatingUser) {
+		this.creatingUser = creatingUser;
+	}
+
+	public List<User> getInterestedUsers() {
+		return interestedUsers;
+	}
+
+	public void setInterestedUsers(List<User> interestedUsers) {
+		this.interestedUsers = interestedUsers;
+	}
+
+	public List<Quotation> getTaggedQuotes() {
+		return taggedQuotes;
+	}
+
+	public void setTaggedQuotes(List<Quotation> taggedQuotes) {
+		this.taggedQuotes = taggedQuotes;
+	}
+	
+	public void addTaggedQuote(Quotation candidate){
+		if (!taggedQuotes.contains(candidate))
+			taggedQuotes.add(candidate);
+	}
+
+	public List<Author> getTaggedAuthors() {
+		return taggedAuthors;
+	}
+
+	public void setTaggedAuthors(List<Author> taggedAuthors) {
+		this.taggedAuthors = taggedAuthors;
+	}
+
 	@Column(name="tag_text")
 	private String tagText;
 	

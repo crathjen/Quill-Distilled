@@ -34,5 +34,8 @@
   />
   <bean class="quotes.jpa.manipulation.SearchServiceJPA" autowire="byType"/>
   <bean class="quotes.jpa.manipulation.UserServiceJPA" autowire="byType"/>
+  <bean class="quotes.jpa.daos.AuthorDAO" autowire="byType"/>
+  <bean class="quotes.jpa.daos.QuoteSourceDAO" autowire="byType"/>
+  <bean class="quotes.jpa.daos.SubjectTagDAO" autowire="byType"/>
 
 </beans>
