@@ -1,5 +1,10 @@
 package quotes.jpa.manipulation;
 
-public interface UserService {
+import org.springframework.transaction.annotation.Transactional;
 
+import quotes.jpa.entities.User;
+
+public interface UserService {
+@Transactional
+public User getUserByName(String s);
 }

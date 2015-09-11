@@ -28,7 +28,7 @@ public class DBLoader {
 		FileSystemXmlApplicationContext context=new FileSystemXmlApplicationContext("WebContent/WEB-INF/JPA.xml");
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuotesPU");
         EntityManager em = emf.createEntityManager();
-	Document doc = Jsoup.connect("https://www.goodreads.com/author/quotes/1221698.Neil_Gaiman").get();
+	Document doc = Jsoup.connect("https://www.goodreads.com/author/quotes/1221698.Neil_Gaiman?page=2").get();
 	Elements quoteds = doc.select(".quoteDetails");
 	System.out.println(quoteds.size());
 	String quoteText=null;

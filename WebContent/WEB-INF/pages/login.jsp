@@ -4,12 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Search</title>
+<title>Login</title>
 </head>
 <body>
-<form action="/Quotes/search/byAuthorLN" method=post>
-<label>Author's Last Name: </label>
-<input type="text" name="lastName"/>
+<form action="/Quotes/validateLogin" method=post>
+<label>Username: </label>
+<input type="text" name="userName"/> <br/>
+<label>Password: </label>
+<input type="password" name="password"/>
 <input type="submit" value="Search for Quotes"/>
 </form>
 </body>

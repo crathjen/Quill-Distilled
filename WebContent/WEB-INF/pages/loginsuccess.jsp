@@ -4,13 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Search</title>
+<title>Success</title>
 </head>
 <body>
-<form action="/Quotes/search/byAuthorLN" method=post>
-<label>Author's Last Name: </label>
-<input type="text" name="lastName"/>
-<input type="submit" value="Search for Quotes"/>
-</form>
+successfully logged in as: ${verifiedUser.userName}
+
 </body>
 </html>

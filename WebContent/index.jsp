@@ -8,8 +8,10 @@
 </head>
 <body>
 <h1>Welcome to Cole's Quotation Services</h1>
+
+<a href="search/random" >Get Random Quote</a><br>
 <a href="navigate/search" >Search for Quotes</a><br>
-<a href="navigate/signin">Sign In</a>
+<a href="navigate/login">Sign In</a>
 
 </body>
 </html>

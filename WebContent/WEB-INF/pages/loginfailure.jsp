@@ -4,13 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Search</title>
+<title>Failure</title>
 </head>
 <body>
-<form action="/Quotes/search/byAuthorLN" method=post>
-<label>Author's Last Name: </label>
-<input type="text" name="lastName"/>
-<input type="submit" value="Search for Quotes"/>
-</form>
+	we were unable to log you in ${param.userName}
 </body>
 </html>

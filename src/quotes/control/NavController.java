@@ -11,5 +11,9 @@ public class NavController {
 	public ModelAndView searchPage(){
 		return new ModelAndView("search");
 	}
+	@RequestMapping("/login")
+	public String loginPage(){
+		return "login";
+	}
 
 }

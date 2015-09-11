@@ -93,6 +93,7 @@ public class Test
         }
         finally
         {
+        	
             if (em != null && em.isOpen())
                 em.close();
             try { emf.close(); } catch (Exception ex) {}
