@@ -37,5 +37,6 @@
   <bean class="quotes.jpa.daos.AuthorDAO" autowire="byType"/>
   <bean class="quotes.jpa.daos.QuoteSourceDAO" autowire="byType"/>
   <bean class="quotes.jpa.daos.SubjectTagDAO" autowire="byType"/>
+  <bean class="quotes.jpa.daos.QuotationDAO" autowire="byType"/>
 
 </beans>

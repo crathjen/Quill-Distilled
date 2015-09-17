@@ -2,6 +2,7 @@ package quotes.jpa.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -65,6 +66,13 @@ public class SubjectTag {
 		if (!taggedQuotes.contains(candidate))
 			taggedQuotes.add(candidate);
 	}
+	public void removeTaggedQuote(Quotation quotation) {
+		if (taggedQuotes.contains(quotation)){
+			taggedQuotes.remove(quotation);
+		}
+		
+	}
+	
 
 	public List<Author> getTaggedAuthors() {
 		return taggedAuthors;
@@ -92,6 +100,7 @@ public class SubjectTag {
 	@ManyToMany
 	@JoinTable(name="Author_Tag", joinColumns=@JoinColumn(name="tag_id"), inverseJoinColumns=@JoinColumn(name="author_id"))
 	private List<Author> taggedAuthors;
-	
+
+
 
 }

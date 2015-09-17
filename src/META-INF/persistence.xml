@@ -24,8 +24,10 @@
     <properties>
       <property 
         name="javax.persistence.jdbc.url" 
-        value="jdbc:derby://localhost:1527/quotes;upgrade=true"
-      />
+        value="jdbc:derby://localhost:1527/playtest;upgrade=true"
+        />
+<!--         value="jdbc:derby://localhost:1527/Quotes;upgrade=true" -->
+      
       <property name="javax.persistence.jdbc.user" value="quotes"/>
       <property name="javax.persistence.jdbc.password" value="quotes"/>
       <property 

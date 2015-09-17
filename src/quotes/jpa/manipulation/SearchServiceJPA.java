@@ -27,7 +27,7 @@ public class SearchServiceJPA implements SearchService {
 	}
 
 	public Quotation getRandomQuote() {
-		System.out.println("Getting Random ...");
+		//System.out.println("Getting Random ...");
 		List<Integer> ids = (List<Integer>)em.createNativeQuery("select id from quotation").getResultList();
 		int randIndex = (int)(ids.size()*Math.random());
 		int randID = ids.get(randIndex);

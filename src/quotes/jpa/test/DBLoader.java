@@ -16,6 +16,7 @@ import org.jsoup.select.Elements;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import quotes.jpa.daos.AuthorDAO;
+import quotes.jpa.daos.QuotationDAO;
 import quotes.jpa.daos.QuoteSourceDAO;
 import quotes.jpa.daos.SubjectTagDAO;
 import quotes.jpa.entities.Author;
@@ -28,7 +29,7 @@ public class DBLoader {
 		FileSystemXmlApplicationContext context=new FileSystemXmlApplicationContext("WebContent/WEB-INF/JPA.xml");
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuotesPU");
         EntityManager em = emf.createEntityManager();
-	Document doc = Jsoup.connect("https://www.goodreads.com/author/quotes/1221698.Neil_Gaiman?page=2").get();
+	Document doc = Jsoup.connect("https://www.goodreads.com/author/quotes/1244.Mark_Twain?page=1").get();
 	Elements quoteds = doc.select(".quoteDetails");
 	System.out.println(quoteds.size());
 	String quoteText=null;
@@ -73,6 +74,7 @@ public class DBLoader {
 		QuoteSource s=new QuoteSource();
 		List<SubjectTag> ls = new ArrayList<>();
 		
+		
 		a.setFirstName(aFirstName);
 		a.setLastName(aLastName);
 		a=context.getBean(AuthorDAO.class).authorExists(a);
@@ -101,12 +103,15 @@ public class DBLoader {
 			//t.commit();
 			ls.add(workingTag);
 		}
-		q=em.merge(q);
+		//q=em.merge(q);
 		q.setAuthor(a);
 		q.setQuoteText(quoteText);
-		//System.out.println(q.getQuoteText());
-		q.setTags(ls);
-	
+		q=context.getBean(QuotationDAO.class).quotationExists(q);
+		q=em.merge(q);
+		//System.out.println("terminator");
+		//if (q.getTags()==null)
+			q.setTags(ls);
+		//System.out.println("the final commit");
 		q=em.merge(q);
 		t.commit();
 

@@ -87,8 +87,17 @@ public class Quotation {
 
 	public void setTags(List<SubjectTag> tags) {
 		this.tags = tags;
+		if (tags!=null)
 		for (SubjectTag t:tags){
 			t.addTaggedQuote(this);
+		}
+	}
+	public void removeTags(List<SubjectTag> tags){
+		for(SubjectTag t:tags){
+			if (this.tags.contains(t)){
+				this.tags.remove(t);
+				t.removeTaggedQuote(this);
+			}
 		}
 	}
 	
