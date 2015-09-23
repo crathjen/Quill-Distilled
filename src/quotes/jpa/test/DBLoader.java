@@ -1,19 +1,19 @@
 package quotes.jpa.test;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import quotes.jpa.daos.AuthorDAO;
 import quotes.jpa.daos.QuotationDAO;
@@ -25,11 +25,25 @@ import quotes.jpa.entities.QuoteSource;
 import quotes.jpa.entities.SubjectTag;
 
 public class DBLoader {
-	public static void main(String[] args) throws IOException {
-		FileSystemXmlApplicationContext context=new FileSystemXmlApplicationContext("WebContent/WEB-INF/JPA.xml");
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuotesPU");
-        EntityManager em = emf.createEntityManager();
-	Document doc = Jsoup.connect("https://www.goodreads.com/author/quotes/1244.Mark_Twain?page=1").get();
+	
+	@Autowired
+	@PersistenceContext(unitName="EMF")
+	protected EntityManager em;
+	@Autowired
+	protected AuthorDAO aDAO;
+	@Autowired	
+	protected QuotationDAO qDAO;
+	@Autowired
+	protected SubjectTagDAO stDAO;
+	@Autowired
+	protected QuoteSourceDAO qsDAO;
+	
+
+	@Transactional
+	public void load(String url) throws IOException {
+	url = "https://www.goodreads.com/author/quotes/"+url;
+	//Document doc = Jsoup.connect("https://www.goodreads.com/author/quotes/" +url).get();
+	Document doc = Jsoup.parse(new URL(url).openStream(),"UTF-8", url);
 	Elements quoteds = doc.select(".quoteDetails");
 	System.out.println(quoteds.size());
 	String quoteText=null;
@@ -67,24 +81,23 @@ public class DBLoader {
 			alTags.add(tag.text());
 			System.out.println("TAG: "+tag.text());
 		}
-		EntityTransaction t = em.getTransaction();
-		t.begin();
+		//EntityTransaction t = em.getTransaction();
+		//t.begin();
 		Quotation q = new Quotation();
 		Author a= new Author();
 		QuoteSource s=new QuoteSource();
 		List<SubjectTag> ls = new ArrayList<>();
 		
-		
 		a.setFirstName(aFirstName);
 		a.setLastName(aLastName);
-		a=context.getBean(AuthorDAO.class).authorExists(a);
+		a=aDAO.authorExists(a);
 //		t.begin();
 		a=em.merge(a);
 //		t.commit();
 		
 		s.setAuthor(a);
 		s.setSourceTitle(workTitle);
-		s=context.getBean(QuoteSourceDAO.class).sourceExists(s);
+		s=qsDAO.sourceExists(s);
 //		t.begin();
 		//if(s!=null&&s.getSourceTitle()!=null)
 		if(s!=null&&s.getSourceTitle()!=null){
@@ -97,7 +110,7 @@ public class DBLoader {
 		for(String stringTag: alTags){
 			SubjectTag workingTag = new SubjectTag();
 			workingTag.setTagText(stringTag);
-			workingTag=context.getBean(SubjectTagDAO.class).tagExists(workingTag);
+			workingTag=stDAO.tagExists(workingTag);
 			//t.begin();
 			workingTag=em.merge(workingTag);
 			//t.commit();
@@ -106,16 +119,16 @@ public class DBLoader {
 		//q=em.merge(q);
 		q.setAuthor(a);
 		q.setQuoteText(quoteText);
-		q=context.getBean(QuotationDAO.class).quotationExists(q);
+		q=qDAO.quotationExists(q);
 		q=em.merge(q);
 		//System.out.println("terminator");
 		//if (q.getTags()==null)
 			q.setTags(ls);
 		//System.out.println("the final commit");
 		q=em.merge(q);
-		t.commit();
+		//t.commit();
 
-	}context.close();
+	}
 	}
 
 }

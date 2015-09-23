@@ -29,6 +29,13 @@ public class Quotation {
 	
 	@OneToMany(mappedBy="quotation")
 	private List<UserQuoteRating> ratings;
+
+	@ManyToOne
+	@JoinColumn(name="posting_user")
+	private User postingUser;
+	
+	@ManyToMany(mappedBy="taggedQuotes")
+	private List<SubjectTag> tags;
 	
 	@ManyToOne
 	@JoinColumn(name="q_source")
@@ -43,12 +50,6 @@ public class Quotation {
 		this.quoteSource = quoteSource;
 	}
 
-	@ManyToOne
-	@JoinColumn(name="posting_user")
-	private User postingUser;
-	
-	@ManyToMany(mappedBy="taggedQuotes")
-	private List<SubjectTag> tags;
 	
 	public int getId() {
 		return id;

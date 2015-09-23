@@ -1,18 +1,19 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Quill Distilled</title>
+<title>Web Scraping</title>
 </head>
 <body>
-<h1>Welcome to Cole's Quotation Services</h1>
-
-<a href="search/random" >Get Random Quote</a><br>
-<a href="navigate/search" >Search for Quotes</a><br>
-<a href="navigate/login">Sign In</a><br>
-<a href="navigate/dbloader">Load Quotes Into Database</a>
-
+	<form action="scrape">
+	<input type="text" size="48" name="url" value="${url}">
+	<input type="submit" value="Scrape">
+	</form>
+	<c:if test="${!empty url}">
+		Success with ${url}
+	</c:if>
 </body>
 </html>

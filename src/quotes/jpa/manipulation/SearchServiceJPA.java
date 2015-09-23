@@ -28,13 +28,14 @@ public class SearchServiceJPA implements SearchService {
 
 	public Quotation getRandomQuote() {
 		//System.out.println("Getting Random ...");
-		List<Integer> ids = (List<Integer>)em.createNativeQuery("select id from quotation").getResultList();
-		int randIndex = (int)(ids.size()*Math.random());
-		int randID = ids.get(randIndex);
-		//return em.find(Quotation.class, randID);
-		TypedQuery<Quotation> query = em.createQuery("select q from Quotation q where q.id = ?1", Quotation.class);
-		//System.out.println("Got past createStatement");
-		return query.setParameter(1, randID).getSingleResult();
+		return (Quotation) em.createNativeQuery("select * from quotation q order by random() fetch first 1 rows only",Quotation.class).getSingleResult();
+//		List<Integer> ids = (List<Integer>)em.createNativeQuery("select id from quotation").getResultList();
+//		int randIndex = (int)(ids.size()*Math.random());
+//		int randID = ids.get(randIndex);
+//		//return em.find(Quotation.class, randID);
+//		TypedQuery<Quotation> query = em.createQuery("select q from Quotation q where q.id = ?1", Quotation.class);
+//		//System.out.println("Got past createStatement");
+//		return query.setParameter(1, randID).getSingleResult();
 		//WHY DOESN"T THE TYPED QUERY FUNCTION??????
 
 	}
@@ -47,6 +48,12 @@ public class SearchServiceJPA implements SearchService {
 	public Quotation getRandomQuoteByAuthor(Author author) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Quotation> findQuotesByTag(String searchExpression) {
+		List<Quotation> results = em.createQuery("select q from Quotation q join q.tags t where t.tagText = ?1", Quotation.class).setParameter(1, searchExpression).getResultList();
+		return results;
 	}
 
 }

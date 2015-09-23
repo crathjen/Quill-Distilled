@@ -22,6 +22,9 @@ public interface SearchService {
 	
 	@Transactional
 	public Quotation getRandomQuoteByAuthor(Author author);
+
+	@Transactional
+	public List<Quotation> findQuotesByTag(String searchExpression);
 	
 	
 	

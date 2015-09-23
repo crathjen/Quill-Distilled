@@ -21,7 +21,7 @@ First_name varchar(30),
 last_name varchar(30),
 email varchar(30) not null,
 Trust_Factor int default 0,
-join_date timestamp default current_timestamp,
+registration_date timestamp default current_timestamp,
 constraint pk_user primary key (user_name)
 );
 
