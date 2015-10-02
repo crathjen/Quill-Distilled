@@ -9,12 +9,11 @@
 <body>
 <form action="/Quotes/search" method=post>
 <label>Search for quotes: 
-<input type="text" name="searchExpression" placeholder="Enter Search Expression" /></label>
+<input type="text" name="searchExpression" autofocus /></label>
 <select name="searchType">
 <option value="authorLN" selected>Author's Last Name </option>
 <option value="tag">Tag</option>
 <option value="quoteText">Quote Text</option>
-<option value="random"></option>
 <option value="authorFN">Author's Full Name </option>
 <option value="bookTitle">Book Title </option>
 </select>

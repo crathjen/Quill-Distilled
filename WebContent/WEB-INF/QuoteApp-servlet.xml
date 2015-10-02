@@ -17,7 +17,7 @@
 		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
+	<mvc:resources location="/CSS/" mapping="/CSS/**"></mvc:resources>
 	<import resource="JPA.xml" />
 
 </beans>
