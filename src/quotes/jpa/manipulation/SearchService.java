@@ -9,7 +9,7 @@ import quotes.jpa.entities.Quotation;
 
 public interface SearchService {
 	@Transactional
-	public List<Quotation> findQuotesByAuthor(String author);
+	public List<Quotation> findQuotesByAuthorLN(String author);
 	
 	@Transactional
 	public List<Quotation> findQuotesByAuthor(Author author);
@@ -25,6 +25,14 @@ public interface SearchService {
 
 	@Transactional
 	public List<Quotation> findQuotesByTag(String searchExpression);
+
+	@Transactional
+	public List<Quotation> findQuotesBySourceTitle(String searchExpression);
+
+	public List<Quotation> findQuotesByQuoteText(String searchExpression);
+
+	public List<Quotation> findQuotesByAuthorFN(String searchExpression);
+	
 	
 	
 	

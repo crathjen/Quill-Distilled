@@ -44,9 +44,9 @@ public class Test
             FileSystemXmlApplicationContext context=new FileSystemXmlApplicationContext("WebContent/WEB-INF/JPA.xml");
             SearchService ss = context.getBean(SearchService.class);
          
-            List<Quotation> l2= ss.findQuotesByAuthor("Kierkegaard");
+            List<Quotation> l2= ss.findQuotesByAuthorLN("Kierkegaard");
             
-            List<Quotation> l3= ss.findQuotesByAuthor("Atwood");
+            List<Quotation> l3= ss.findQuotesByAuthorLN("Atwood");
             if (l2!=null)
             for(Quotation qt:l2){
             	System.out.println(qt.getQuoteText());

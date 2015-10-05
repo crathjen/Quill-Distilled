@@ -3,10 +3,10 @@
 <div id = "menu">
 
 <div class="container-fluid">
-<div class="row vertical-align">
-<div class="col-md-6"><img src="/Quotes/CSS/images/large_title_graphic.png">
+<div class="row">
+<div class="col-sm-6 col-xs-12"><img src="/Quotes/CSS/images/large_title_graphic.png">
 </div>
-<div id="searchForm" class="col-md-6">
+<div id="searchForm" class="col-sm-6 col-xs-12">
 <form  class="form-inline" action="/Quotes/search" method=post>
 
 <div class="input-group">

@@ -11,7 +11,7 @@ body{
   border-bottom: solid 6px purple;
   line-height: 100%;
   border-radius: 4em;
-  font: normal 0.5333333333333333em Arial, Helvetica, sans-serif;
+  font: normal 0.5333333333333333em Alegreya, Helvetica, sans-serif;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 10px;
@@ -20,31 +20,15 @@ body{
   xwidth: auto;
 }
 
-#menu label, #menu input[type="submit"], x#menu option{
-	font-weight: bold;
-  font-size: 13px;
-	display:inline;
-}
 
-x#menu select, x#menu input[type=text], #menu input[type=submit]{
-	background:#ffe6e6;
-	border:none;
-	display:inline;
-	margin:6px;
-	width:140px;
-	
-	
-}
+
+
 
 
 #searchForm{
 	padding-top:9px;
 }
-#menu input[type=submit]:hover{
 
-	background:red;
-	color:white;
-}
 #menu input[type="text"]{
 	background:white;
 	
@@ -54,10 +38,7 @@ x#menu select, x#menu input[type=text], #menu input[type=submit]{
 	min-width:240px;
 }
 
-#menu input[type=submit]{
-	margin-left:auto;
-	margin-right:auto;
-}
+
 
 
 #menu li {
@@ -71,7 +52,7 @@ x#menu select, x#menu input[type=text], #menu input[type=submit]{
 #menu a, 
 #menu a:link {
   font-weight: bold;
-  font-size: 13px;
+  font-size: 16px;
   color: #e7e5e5;
   text-decoration: none;
   display: block;

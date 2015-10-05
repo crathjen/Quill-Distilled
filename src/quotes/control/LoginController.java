@@ -12,22 +12,19 @@ import quotes.jpa.manipulation.UserService;
 
 @Controller
 public class LoginController {
-	
+
 	@Autowired
 	private UserService us;
-	
+
 	@RequestMapping("/validateLogin")
-	public ModelAndView validateLogin(String userName, String password, HttpSession session){
+	public ModelAndView validateLogin(String userName, String password, HttpSession session) {
 		User requester = us.getUserByName(userName);
-		if (requester.getPassword().equals(password))
-		{
+		if (requester.getPassword().equals(password)) {
 			session.setAttribute("verifiedUser", requester);
 			return new ModelAndView("loginsuccess");
-		}
-		else 
+		} else
 			return new ModelAndView("loginfailure");
-		
+
 	}
-	
 
 }

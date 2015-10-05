@@ -14,9 +14,9 @@ public class SearchServiceJPA implements SearchService {
 	@PersistenceContext(unitName="EMF")
 	protected EntityManager em;
 	
-	public List<Quotation> findQuotesByAuthor(String authorLN) {
+	public List<Quotation> findQuotesByAuthorLN(String authorLN) {
 		System.out.println("in Method");
-		List<Quotation> results = em.createQuery("select q from Quotation q where q.author.lastName = ?1", Quotation.class).setParameter(1,authorLN).getResultList();
+		List<Quotation> results = em.createQuery("select q from Quotation q where UPPER(q.author.lastName) = UPPER(?1)", Quotation.class).setParameter(1,authorLN).getResultList();
 		//System.out.println(results);
 		return results;
 	}
@@ -52,8 +52,26 @@ public class SearchServiceJPA implements SearchService {
 
 	@Override
 	public List<Quotation> findQuotesByTag(String searchExpression) {
-		List<Quotation> results = em.createQuery("select q from Quotation q join q.tags t where t.tagText = ?1", Quotation.class).setParameter(1, searchExpression).getResultList();
+		List<Quotation> results = em.createQuery("select q from Quotation q join q.tags t where UPPER(t.tagText) = UPPER(?1)", Quotation.class).setParameter(1, searchExpression).getResultList();
 		return results;
+	}
+
+	@Override
+	public List<Quotation> findQuotesBySourceTitle(String searchExpression) {
+		List<Quotation> results= em.createQuery("select q from Quotation q where UPPER(q.quoteSource.sourceTitle)=UPPER(?1)", Quotation.class).setParameter(1, searchExpression).getResultList();
+		return results;
+	}
+
+	@Override
+	public List<Quotation> findQuotesByQuoteText(String searchExpression) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Quotation> findQuotesByAuthorFN(String searchExpression) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

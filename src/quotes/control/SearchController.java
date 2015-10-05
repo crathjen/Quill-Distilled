@@ -27,12 +27,25 @@ public class SearchController {
 	
 	@RequestMapping(params = "searchType=authorLN")
 	public ModelAndView getQuoteByAuthorLN(String searchExpression){
-		return new ModelAndView("DisplayQuotes","results", ss.findQuotesByAuthor(searchExpression));
+		return new ModelAndView("DisplayQuotes","results", ss.findQuotesByAuthorLN(searchExpression));
 	}
 	
 	@RequestMapping(params = "searchType=tag")
 	public ModelAndView getQuoteByTag(String searchExpression){
 		return new ModelAndView("DisplayQuotes","results", ss.findQuotesByTag(searchExpression));
+	}
+	
+	@RequestMapping(params="searchType=bookTitle")
+	public ModelAndView getQuoteByBookTitle(String searchExpression){
+		return new ModelAndView("DisplayQuotes","results", ss.findQuotesBySourceTitle(searchExpression));
+	}
+	@RequestMapping(params="searchType=quoteText")
+	public ModelAndView getQuoteByQuoteText(String searchExpression){
+		return new ModelAndView("DisplayQuotes","results", ss.findQuotesByQuoteText(searchExpression));
+	}
+	@RequestMapping(params="searchType=authorFN")
+	public ModelAndView getQuoteByAuthorFN(String searchExpression){
+		return new ModelAndView("DisplayQuotes","results", ss.findQuotesByAuthorFN(searchExpression));
 	}
 	
 
