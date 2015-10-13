@@ -28,8 +28,9 @@
 <hr>
 <ul>
 <li><a href="/Quotes/search/random" >Get Random Quote</a></li>
-<li><a href="/Quotes/navigate/search" >Search for Quotes</a></li>
-<li><a href="/Quotes/navigate/login">Sign In</a></li>
-<li><a href="/Quotes/navigate/dbloader">Load Quotes Into Database</a></li>
+<li><a href="/Quotes/account">Account</a></li>
+<li id = "login"><form><input id ="username" placeholder="username"></input><input id = "password" type="password" placeholder="password"></input><a id=loginlink>Sign In</a></form></li>
+
+
 </ul>
 </div>

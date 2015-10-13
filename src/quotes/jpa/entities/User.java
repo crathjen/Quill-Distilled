@@ -1,5 +1,8 @@
 package quotes.jpa.entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,13 +12,22 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
 @Table(name="registered_user")
-public class User {
+public class User implements UserDetails, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1890106497421652139L;
+
 	@Id
 	@Column(name="user_name")
-	private String userName;
+	private String username;
 	
 	@Column
 	private String password;
@@ -46,12 +58,12 @@ public class User {
 	
 	
 	
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String userName) {
+		this.username = userName;
 	}
 
 	public String getPassword() {
@@ -84,6 +96,57 @@ public class User {
 
 	public void setUserQuotationSubmissions(List<Quotation> userQuotationSubmissions) {
 		this.userQuotationSubmissions = userQuotationSubmissions;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		ArrayList<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		switch (trustFactor) {
+		case 1:
+			authorities.add(new SimpleGrantedAuthority("base_user"));
+			return authorities;
+		case 2:
+			authorities.add(new SimpleGrantedAuthority("reporting_user"));
+			return authorities;
+		case 3:
+			authorities.add(new SimpleGrantedAuthority("super_user"));
+			return authorities;
+		case 4:
+			authorities.add(new SimpleGrantedAuthority("admin"));
+			System.out.println("admin");
+			return authorities;
+		case 5:
+			authorities.add(new SimpleGrantedAuthority("locked"));
+			return authorities;
+		default:
+			return null;
+		}
+	}
+
+
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 	
 	

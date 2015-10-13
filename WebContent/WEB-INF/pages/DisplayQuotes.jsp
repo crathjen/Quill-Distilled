@@ -7,6 +7,8 @@
 <link href='https://fonts.googleapis.com/css?family=Alegreya&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="/Quotes/CSS/bootstrap.css">
 <link rel="stylesheet" href="/Quotes/CSS/styles.css">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="/Quotes/CSS/js/login.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Results</title>
 </head>
@@ -23,22 +25,19 @@
 			
 				<li><div class="quote">
 					${quote.quoteText}
+					<span class="objinfo" hidden="true"></span>
 					
 				</div>
 				
 				<c:if test="${!empty quote.author}">
-					<table class="author">
-					<tr>
-						<td>Author:	</td><td class=author>${quote.author.firstName} ${quote.author.lastName}</td>
-					
-						</tr>
-						</table>
+					<div class="author">
+					Author:	<span class="author">${quote.author.firstName} ${quote.author.lastName}<span class="objinfo" hidden="true">${quote.author.id}</span></span>
+						</div>
 						<c:if test="${!empty quote.quoteSource}">
-							<table class="source">
-							<tr>
-							<td>Book: ${quote.quoteSource.sourceTitle}</td>
-							</tr>
-							</table>
+							<div class="source">
+							Book: <span class="book">${quote.quoteSource.sourceTitle}<span class="objinfo" hidden="true">${quote.quoteSource.id}</span></span>
+						
+							</div>
 						</c:if>
 					
 					
@@ -47,14 +46,13 @@
 				
 				<c:if test="${!empty quote.tags}">
 				
-					<table class="tags">
-					<tr>
-					<td>Tags: </td>
+					<div class="tags">
+					
+					Tags: 
 					<c:forEach var="tag" items="${quote.tags}">
-							<td class="tag">${tag.tagText} </td>
+							<span class="tag">${tag.tagText} <span class="objinfo" hidden="true">${tag.id}</span></span>
 					</c:forEach>
-					</tr>
-					</table>
+					</div>
 				</c:if>
 		
 		</li>

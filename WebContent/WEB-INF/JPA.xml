@@ -18,6 +18,7 @@
 
   <bean
     id="EMF"
+    name="EMF"
     class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
   >
     <property name="persistenceUnitName" value="QuotesPU" />
@@ -32,8 +33,9 @@
     class="org.springframework.orm.jpa.JpaTransactionManager"
     autowire="byType"
   />
+  
   <bean class="quotes.jpa.manipulation.SearchServiceJPA" autowire="byType"/>
-  <bean class="quotes.jpa.manipulation.UserServiceJPA" autowire="byType"/>
+  
   <bean class="quotes.jpa.daos.AuthorDAO" autowire="byType"/>
   <bean class="quotes.jpa.daos.QuoteSourceDAO" autowire="byType"/>
   <bean class="quotes.jpa.daos.SubjectTagDAO" autowire="byType"/>
