@@ -42,6 +42,7 @@
 	<security:intercept-url pattern="/navigate/dbloader**" access="hasAuthority('admin')" />
 	<security:csrf disabled="true"/>
 	<security:form-login default-target-url="/Quotes" authentication-failure-handler-ref="myLoginFailureHandler" authentication-success-handler-ref="myLoginSuccessHandler"/>
+	<security:logout success-handler-ref="myLogoutSuccessHandler"/>
 	</security:http>
 	
 	
@@ -52,6 +53,7 @@
 	</security:authentication-manager>
 	<bean id="myLoginFailureHandler" class="quotes.jpa.manipulation.LoginFailureHandler" />
 	<bean id="myLoginSuccessHandler" class="quotes.jpa.manipulation.LoginSuccessHandler" />
+	<bean id="myLogoutSuccessHandler" class="quotes.jpa.manipulation.LogoutHandler" />
 	
 	<bean name="UserServiceJPA" class="quotes.jpa.manipulation.UserServiceJPA" autowire="byType"></bean>
      </beans>

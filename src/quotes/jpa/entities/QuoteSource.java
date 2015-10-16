@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="quote_source")
 public class QuoteSource {
@@ -20,6 +22,7 @@ public class QuoteSource {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="Author_ID")
 	private Author author;
@@ -27,6 +30,7 @@ public class QuoteSource {
 	@Column(name="source_title")
 	private String sourceTitle;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="quoteSource")
 	private List<Quotation> quotations;
 	

@@ -18,16 +18,36 @@ body{
   border-radius: 10px;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-  xwidth: auto;
+
 }
 
+#quoteSubmission{
+	background:orange;
+	border-radius:8px;
+	margin:5px;
+	padding:14px;
+	padding-top:34px;
+}
+.form-horizontal label[for="quoteText"].control-label{
+	line-height: 154px;
+	padding-top: 0px;
+}
 
-
-
-
+.centerbtn{
+	width:112.906px;
+	margin:auto;
+	
+}
+#quoteSubmission legend{
+	text-align:center;
+	font-weight: bold;
+	font-size: 28px;
+	margin-bottom:30px;
+	
+}
 
 #searchForm{
-	padding-top:9px;
+	padding-top:12px;
 }
 
 #menu input[type="text"]{
@@ -60,14 +80,12 @@ body{
   padding: 8px 20px;
   margin: 0;
   border-radius: 5px;
+  transition-duration:.5s;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-#menu a:hover {
-  background: #000;
-  color: #fff;
-}
+
 
 #menu .active a, 
 #menu li:hover a {
@@ -79,8 +97,111 @@ body{
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   text-shadow: 0 1px 0 #ffffff;
 }
+#menu li ul li{
+	background:transparent;
+	position:relative;
+	transition-duration:1.5s;
+	
+	padding:0px;
+	margin:0px;
+	width:100px;
+}
 
+.user, .login{
+	display:none;
+}
+#menu li:hover ul li a{
+	
+	
+}
+#menu li:hover ul li:hover a{
+	text-shadow:none;
+	background:orange;
+	color:white;
+	
+}
+#menu li ul li a{
+	margin:0px;
+	text-shadow:none;
+	transition-duration: 1.5s !important;
+	border-radius: 0px;
+	width:100px !important;
+}
+#menu li ul{
+	
+	position:absolute;
+	transition-duration:1.5s;
+	display:none;
+}
 
+@keyframes fadein{
+	from{opacity:0;}
+	to{opacity:1;}
+}
+#menu li:hover ul{
+	
+	transition-duration:1.5s;
+	z-index:10;
+	display:block;
+	padding-left:30px;
+	text-shadow:none;
+	animation: fadein .8s;
+}
+
+#menu .login{
+	float:right;
+}
+#menu .login a{
+	display:inline-block;
+	vertical-align: center;
+}
+.login input{
+	display:none;
+
+	margin: 2px;
+	
+	font-size: 12px;
+	transition-duration:2s;
+}
+
+.login:hover {
+  background: #B9B9F0;
+  color: #444;
+  border-radius:5px;
+  transition-duration:1.5s;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 0 #ffffff;
+}
+#menu .login:hover a {
+	background:transparent;
+	transition-duration:1.5s;
+	box-shadow:none;
+	-webkit-box-shadow:none;
+	-moz-box-shadow: none;
+}
+#menu .login a {
+	transition-duration:1.5s;
+}
+#menu .login *{
+	margin-bottom:0;
+}
+#menu .login {
+	border-radius:5px;
+	padding:0;
+	transition-duration:1.5s;
+}
+
+#menu #user {
+	float: right;
+
+}
+
+#menu #user a {
+	width: 160px;
+	text-align: center;
+}
 
 #menu ul:after {
   content: ".";
@@ -139,15 +260,4 @@ span.author:hover, span.tag:hover, span.book:hover{
 	cursor:pointer;
 }
 
-#menu #login{
-	float:right;
-}
-#menu #login a{
-	display:inline-block;
-	vertical-align: center;
-}
-#login input{
-	display:none;
-	margin: 2px;
-	font-size: 12px;
-}
+

@@ -69,8 +69,10 @@ public class SearchServiceJPA implements SearchService {
 
 	@Override
 	public List<Quotation> findQuotesByAuthorFN(String searchExpression) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Quotation> results = em.createQuery("select q from Quotation q where UPPER(concat(concat(q.author.firstName,' '),q.author.lastName)) = UPPER(?1)", Quotation.class).setParameter(1,searchExpression).getResultList();
+		//System.out.println(results);
+		return results;
 	}
 
 }

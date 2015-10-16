@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Author {
 	
@@ -26,15 +28,19 @@ public class Author {
 	@Column
 	private String descriptor;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="author")
 	private List<Quotation> authorQuotes;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="taggedAuthors")
 	private List<SubjectTag> tags;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="author")
 	private List<UserAuthorRating> ratings;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="author")
 	private List<QuoteSource> bodyOfWork;
 
@@ -69,7 +75,7 @@ public class Author {
 	public void setDescriptor(String descriptor) {
 		this.descriptor = descriptor;
 	}
-
+	
 	public List<Quotation> getAuthorQuotes() {
 		return authorQuotes;
 	}

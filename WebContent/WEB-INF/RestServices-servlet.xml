@@ -15,6 +15,6 @@
 	</context:component-scan>
 	<context:annotation-config></context:annotation-config>
 	<mvc:annotation-driven />
-
+	<import resource="JPA.xml" />
 
 </beans>

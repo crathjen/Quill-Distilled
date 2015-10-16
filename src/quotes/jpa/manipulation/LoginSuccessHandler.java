@@ -1,5 +1,7 @@
 package quotes.jpa.manipulation;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,8 +16,12 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication){
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 		try{
-		response.getWriter().print(ow.writeValueAsString(authentication));
+		PrintWriter pw = response.getWriter();
+		//pw.println(ow.writeValueAsString(authentication));
 		response.setStatus(response.SC_ACCEPTED);
+		pw.print("{\"name\" : \""+authentication.getName()+"\", ");
+		pw.print("\"authorities\" : "+ow.writeValueAsString(authentication.getAuthorities())+"}");
+		
 		}catch(Exception e){
 			System.out.println(e);
 		}

@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Quotation {
 
@@ -27,9 +29,11 @@ public class Quotation {
 	@Column(name="quote_text")
 	private String quoteText;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="quotation")
 	private List<UserQuoteRating> ratings;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="posting_user")
 	private User postingUser;

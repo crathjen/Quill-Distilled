@@ -68,6 +68,7 @@ public class DBLoader {
 
 			if(l.attr("href").contains("author")){
 				aLastName=l.text().substring(l.text().lastIndexOf(" ")+1);
+				if(l.text().lastIndexOf(" ")>0)
 				aFirstName=l.text().substring(0, l.text().lastIndexOf(" "));
 				System.out.println("AUTHOR: "+aFirstName+aLastName);
 			}

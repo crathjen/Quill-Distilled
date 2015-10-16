@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="/Quotes/CSS/styles.css">
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="/Quotes/CSS/js/login.js"></script>
+<script src="/Quotes/CSS/js/search.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Results</title>
 </head>
@@ -25,7 +26,7 @@
 			
 				<li><div class="quote">
 					${quote.quoteText}
-					<span class="objinfo" hidden="true"></span>
+					<span class="objinfo" hidden="true">${quote.id}</span>
 					
 				</div>
 				
