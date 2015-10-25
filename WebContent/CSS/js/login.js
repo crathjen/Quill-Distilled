@@ -37,6 +37,19 @@ $(document).ready(function() {
 		}
 	})
 	
+	var submitqt = $("#submitqtbtn")
+	submitqt.click(function(){
+		$.ajax({
+			url : "/Quotes/submitQuote",
+			dataType: "html",
+			success: loadSubmitForm,
+			error: ajaxerror
+		})
+		function loadSubmitForm(data){
+			$(".bodyContent").html(data);
+		}
+	})
+	
 	link.click(function() {
 		
 		//$("#login input").css("transitionduration", "inline");

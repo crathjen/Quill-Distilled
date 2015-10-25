@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -44,13 +45,13 @@ public class User implements UserDetails, Serializable{
 	@OneToMany(mappedBy="creatingUser")
 	private List<SubjectTag> userCreatedTags;
 	
-	@ManyToMany(mappedBy="interestedUsers")
+	@ManyToMany(mappedBy="interestedUsers", fetch=FetchType.EAGER)
 	private List<SubjectTag> userInterests;
 
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
 	private List<UserAuthorRating> ratedAuthors;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
 	private List<UserQuoteRating> ratedQuotes;
 	
 	@OneToMany(mappedBy="creatingUser")
@@ -141,6 +142,30 @@ public class User implements UserDetails, Serializable{
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	public List<SubjectTag> getUserInterests() {
+		return userInterests;
+	}
+
+	public void setUserInterests(List<SubjectTag> userInterests) {
+		this.userInterests = userInterests;
+	}
+
+	public List<UserAuthorRating> getRatedAuthors() {
+		return ratedAuthors;
+	}
+
+	public void setRatedAuthors(List<UserAuthorRating> ratedAuthors) {
+		this.ratedAuthors = ratedAuthors;
+	}
+
+	public List<UserQuoteRating> getRatedQuotes() {
+		return ratedQuotes;
+	}
+
+	public void setRatedQuotes(List<UserQuoteRating> ratedQuotes) {
+		this.ratedQuotes = ratedQuotes;
 	}
 
 	@Override

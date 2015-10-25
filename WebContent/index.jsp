@@ -8,6 +8,8 @@
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="/Quotes/CSS/js/login.js"></script>
 <script src="/Quotes/CSS/js/search.js"></script>
+<script src="/Quotes/CSS/js/navigation.js"></script>
+<script src="/Quotes/CSS/js/submit.js"></script>
 <link rel="stylesheet" href="CSS/bootstrap.css">
 <link rel="stylesheet" href="CSS/styles.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

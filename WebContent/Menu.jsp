@@ -34,8 +34,14 @@
 	<hr>
 	<ul>
 		<li><a id="randombtn"><!-- href="/Quotes/search/random" -->Get Random Quote</a></li>
-		<li><a href="/Quotes/submitQuote">Submit a Quote</a></li>
-		<li><a>Favorites</a></li>
+		<li><a id="submitqtbtn">Submit a Quote</a></li>
+		<li><a id="wordPlay">WordPlay</a>
+			<ul>
+				<li><a>Cipher Service</a></li>
+				<li><a>Piggify</a></li>
+			
+			</ul>
+		</li>
 		
 		
 		
@@ -50,7 +56,7 @@
 <%-- 		<c:if test="${!user.equals(\"anonymousUser\")}"> --%>
 			<li id="user" class="user"><a><c:if test="${!user.equals(\"anonymousUser\")}">${user.username}</c:if></a>
 			<ul>
-				<li><a>Home</a></li>
+				<li><a id="homebtn">Home</a></li>
 				<li><a>Account Summary</a></li>
 				<li><a>Interests</a></li>
 				<li><a id="signoutbtn">Sign Out</a></li>

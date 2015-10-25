@@ -21,7 +21,6 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 		response.setStatus(response.SC_ACCEPTED);
 		pw.print("{\"name\" : \""+authentication.getName()+"\", ");
 		pw.print("\"authorities\" : "+ow.writeValueAsString(authentication.getAuthorities())+"}");
-		
 		}catch(Exception e){
 			System.out.println(e);
 		}

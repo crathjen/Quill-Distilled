@@ -16,5 +16,5 @@
 	<context:annotation-config></context:annotation-config>
 	<mvc:annotation-driven />
 	<import resource="JPA.xml" />
-
+	<bean class="quotes.control.CrudController"/>
 </beans>

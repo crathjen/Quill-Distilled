@@ -1,4 +1,8 @@
 body{
+	xbackground-image: url("images/bookbg.jpg");
+	xbackground-repeat: no-repeat;
+	xbackground-attachment: fixed;
+	xbackground-size:100%;
 	background:black;
 }
 
@@ -33,6 +37,26 @@ body{
 	padding-top: 0px;
 }
 
+#quoteSubmission .resultcontainer{
+	float:left;
+}
+#authorMatches{
+	position:absolute;
+	left:35px;
+	border:solid green 2px;
+	z-index:15;
+	padding-left:0px;
+}
+#authorMatches li{
+	position:relative;
+	xz-index: 15;
+	list-style: none;
+	background:lightgreen;
+}
+#authorMatches li:hover{
+	background:green;
+}
+
 .centerbtn{
 	width:112.906px;
 	margin:auto;
@@ -44,6 +68,12 @@ body{
 	font-size: 28px;
 	margin-bottom:30px;
 	
+}
+#quotesubmitbtn{
+	font-weight:bold;
+	color:blue;
+	width:100%;
+	border: solid 2px blue;
 }
 
 #searchForm{
@@ -259,5 +289,75 @@ span.author:hover, span.tag:hover, span.book:hover{
 	background:red;
 	cursor:pointer;
 }
+li.quotecontainer *{
+	display:inline-block;
+	float:left;
+}
+li.quotecontainer .label{
+	padding:3px;
+	margin:2px;
+	color:black;
+	font-weight:normal;
+	line-height:1.42857143;
+}
+li.quotecontainer div{
+	display:block;
+	clear:left;
+}
+div.author>*{
+	display:inline-block;
+	margin:0px;
+	line-height:normal;
+	vertical-align: middle;
+	float:left;
 
+}
+
+span.opine{
+	background:yellow;
+	border-radius: 5px;
+	color:purple;
+	padding:3px;
+	display:none;
+	margin:2px;
+	margin-left:-2px;
+	
+	width:0px;
+	min-width:0px;
+	overflow:hidden;
+}
+
+span:hover+span.opine, span.opine:hover, li:hover span.opine.qt{
+	display:inline-block;
+	xvertical-align:middle;
+	xdisplay:inline;
+	animation: growOutRating .8s;
+	width:58.5px;
+}
+span.opine:hover{
+	background:gold;
+}
+
+span.tag:hover+span.opine, span.tag+span.opine:hover{
+	animation:growOutLike .8s;
+	width:40px;
+	
+}
+
+span.opine.qt{
+	float:right;
+}
+
+#wordPlay{
+	text-align:center;
+	width:160px;
+}
+@keyframes growOutRating{
+	from{width:0px;}
+	to{width:58.5px;}
+}
+@keyframes growOutLike{
+	from{width:0px;}
+	to{width:40px;}
+}
 
