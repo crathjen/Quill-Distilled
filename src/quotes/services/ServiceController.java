@@ -42,6 +42,20 @@ public class ServiceController {
 		//System.out.println(searchExpression);
 		return ss.findQuotesBySourceTitle(searchExpression);
 	}
+	@RequestMapping(path="/search", params="searchType=authorID", produces="application/json")
+	public List<Quotation> authorIDSearch(String searchExpression){
+		return ss.findQuotesByAuthorID(searchExpression);
+	}
+	@RequestMapping(path="/search", params="searchType=bookTitleID", produces="application/json")
+	public List<Quotation> sourceIDSearch(String searchExpression){
+		return ss.findQuotesBySourceID(searchExpression);
+	}
+	@RequestMapping(path="/search", params="searchType=tagID", produces="application/json")
+	public List<Quotation> tagIDSearch(String searchExpression){
+		return ss.findQuotesByTagID(searchExpression);
+	}
+	
+	
 	
 	
 }

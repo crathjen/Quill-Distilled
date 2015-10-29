@@ -22,6 +22,30 @@ public class UserAuthorRating {
 	private int authorID;
 	
 	
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public int getAuthorID() {
+		return authorID;
+	}
+
+	public void setAuthorID(int authorID) {
+		this.authorID = authorID;
+	}
+
 	@ManyToOne
 	@JoinColumn(name="reg_user", insertable=false, updatable=false)
 	private User user;

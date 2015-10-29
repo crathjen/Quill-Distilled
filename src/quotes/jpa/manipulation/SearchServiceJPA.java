@@ -75,4 +75,22 @@ public class SearchServiceJPA implements SearchService {
 		return results;
 	}
 
+	@Override
+	public List<Quotation> findQuotesByAuthorID(String searchExpression) {
+		List<Quotation> results=em.createQuery("select q from Quotation q where q.author.id=?1",Quotation.class).setParameter(1, Integer.parseInt(searchExpression)).getResultList();
+		return results;
+	}
+
+	@Override
+	public List<Quotation> findQuotesBySourceID(String searchExpression) {
+		List<Quotation> results=em.createQuery("select q from Quotation q where q.quoteSource.id=?1",Quotation.class).setParameter(1, Integer.parseInt(searchExpression)).getResultList();
+		return results;
+	}
+
+	@Override
+	public List<Quotation> findQuotesByTagID(String searchExpression) {
+		List<Quotation> results=em.createQuery("select q from Quotation q join q.tags t where t.id=?1",Quotation.class).setParameter(1, Integer.parseInt(searchExpression)).getResultList();
+		return results;
+	}
+
 }

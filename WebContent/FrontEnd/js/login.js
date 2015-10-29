@@ -37,18 +37,18 @@ $(document).ready(function() {
 		}
 	})
 	
-	var submitqt = $("#submitqtbtn")
-	submitqt.click(function(){
-		$.ajax({
-			url : "/Quotes/submitQuote",
-			dataType: "html",
-			success: loadSubmitForm,
-			error: ajaxerror
-		})
-		function loadSubmitForm(data){
-			$(".bodyContent").html(data);
-		}
-	})
+//	var submitqt = $("#submitqtbtn")
+//	submitqt.click(function(){
+//		$.ajax({
+//			url : "/Quotes/submitQuote",
+//			dataType: "html",
+//			success: loadSubmitForm,
+//			error: ajaxerror
+//		})
+//		function loadSubmitForm(data){
+//			$(".bodyContent").html(data);
+//		}
+//	})
 	
 	link.click(function() {
 		
@@ -77,6 +77,8 @@ $(document).ready(function() {
 				$(".user").css("display","block")
 				//$("#menu ul:first-of-type").append($("<li id=\"user\"><a>"+data.name+"</a></li>"))
 				user=data.name;
+				console.log(data);
+				user.id=data.id;
 				//link.html(foo.name)
 				//console.log(data.name);
 				//console.log(data.authorities[0].authority)

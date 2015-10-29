@@ -29,9 +29,22 @@ public interface SearchService {
 	@Transactional
 	public List<Quotation> findQuotesBySourceTitle(String searchExpression);
 
+	@Transactional
 	public List<Quotation> findQuotesByQuoteText(String searchExpression);
 
+	@Transactional
 	public List<Quotation> findQuotesByAuthorFN(String searchExpression);
+	
+	@Transactional
+	public List<Quotation> findQuotesByAuthorID(String searchExpression);
+	
+	@Transactional
+	public List<Quotation> findQuotesBySourceID(String searchExpression);
+	
+	@Transactional
+	public List<Quotation> findQuotesByTagID(String searchExpression);
+	
+	
 	
 	
 	

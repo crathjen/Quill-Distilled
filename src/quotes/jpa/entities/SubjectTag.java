@@ -1,5 +1,6 @@
 package quotes.jpa.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,8 +18,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity 
 @Table(name="subject_tag")
-public class SubjectTag {
+public class SubjectTag implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2727635378797813542L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -54,6 +60,11 @@ public class SubjectTag {
 	public void setInterestedUsers(List<User> interestedUsers) {
 		this.interestedUsers = interestedUsers;
 	}
+	public void addInterestedUser(User candidate){
+		if (!interestedUsers.contains(candidate)){
+			interestedUsers.add(candidate);
+		}
+	}
 
 	public List<Quotation> getTaggedQuotes() {
 		return taggedQuotes;
@@ -67,6 +78,28 @@ public class SubjectTag {
 		if (!taggedQuotes.contains(candidate))
 			taggedQuotes.add(candidate);
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SubjectTag other = (SubjectTag) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
 	public void removeTaggedQuote(Quotation quotation) {
 		if (taggedQuotes.contains(quotation)){
 			taggedQuotes.remove(quotation);

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -51,7 +52,7 @@ public class User implements UserDetails, Serializable{
 	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
 	private List<UserAuthorRating> ratedAuthors;
 	
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<UserQuoteRating> ratedQuotes;
 	
 	@OneToMany(mappedBy="creatingUser")
@@ -98,6 +99,7 @@ public class User implements UserDetails, Serializable{
 	public void setUserQuotationSubmissions(List<Quotation> userQuotationSubmissions) {
 		this.userQuotationSubmissions = userQuotationSubmissions;
 	}
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -150,6 +152,37 @@ public class User implements UserDetails, Serializable{
 
 	public void setUserInterests(List<SubjectTag> userInterests) {
 		this.userInterests = userInterests;
+	}
+	public void addUserInterest(SubjectTag candidate){
+		if (!userInterests.contains(candidate)){
+			userInterests.add(candidate);
+			candidate.addInterestedUser(this);
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
 	}
 
 	public List<UserAuthorRating> getRatedAuthors() {

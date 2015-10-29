@@ -17,7 +17,7 @@
 	<div>
 		<h5>Authors You've Rated</h5>
 		<c:if test="${!empty user.ratedAuthors}">
-			<ul id="userTags">
+			<ul id="userauthorRatings">
 				<c:forEach var="authorRating" items="${user.ratedAuthors}">
 					<li>${authorRating}</li>
 				</c:forEach>
@@ -27,7 +27,7 @@
 	<div>
 		<h5>Quotes You've Rated</h5>
 		<c:if test="${!empty user.ratedQuotes}">
-			<ul id="userTags">
+			<ul id="userQuoteRatings">
 				<c:forEach var="quoteRating" items="${user.ratedQuotes}">
 					<li>${quoteRating}</li>
 				</c:forEach>

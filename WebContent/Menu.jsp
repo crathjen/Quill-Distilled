@@ -6,7 +6,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-6 col-xs-12">
-				<img src="/Quotes/CSS/images/large_title_graphic.png">
+				<img src="/Quotes/FrontEnd/images/large_title_graphic.png">
 			</div>
 			<div id="searchForm" class="col-sm-6 col-xs-12">
 				<form id="menuSearchForm" class="form-inline" action="/Quotes/search" method=post>

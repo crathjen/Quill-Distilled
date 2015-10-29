@@ -20,7 +20,7 @@
 		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	<mvc:resources location="/CSS/" mapping="/CSS/**"></mvc:resources>
+	<mvc:resources location="/FrontEnd/" mapping="/FrontEnd/**"></mvc:resources>
 	
 
 	

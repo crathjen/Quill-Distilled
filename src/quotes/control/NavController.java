@@ -30,11 +30,12 @@ public class NavController {
 		return "submitQuote";
 	}
 	
-	
+	@Transactional
 	@RequestMapping("/userHome")
 	public ModelAndView getUserHome(){
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
+		user=em.find(User.class, user.getUsername());
+		em.refresh(user);
 		//user = em.createQuery("Select u from User u where u.username=?1", User.class).setParameter(1, user.getUsername()).getSingleResult();
 		//System.out.println(user.getPassword());
 		//System.out.println(user.getUserInterests().size());

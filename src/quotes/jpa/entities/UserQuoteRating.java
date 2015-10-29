@@ -1,5 +1,6 @@
 package quotes.jpa.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -27,6 +28,46 @@ public class UserQuoteRating {
 	@JoinColumn(name="quote_id", insertable=false, updatable=false)
 	private Quotation quotation;
 	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public int getQuoteID() {
+		return quoteID;
+	}
+
+	public void setQuoteID(int quoteID) {
+		this.quoteID = quoteID;
+	}
+
+	public Quotation getQuotation() {
+		return quotation;
+	}
+
+	public void setQuotation(Quotation quotation) {
+		this.quotation = quotation;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
 	@ManyToOne
 	@JoinColumn(name="reg_user", insertable=false, updatable=false)
 	private User user;

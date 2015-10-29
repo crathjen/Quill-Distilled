@@ -55,7 +55,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="rating">Your Rating (1-5): </label>
 						<div class="col-sm-2">
-							<input type="number" class="form-control tag" id="rating">
+							<input type="number" min="1" max="5" required class="form-control" id="rating">
 						</div>
 						<label class="col-sm-2 control-label" for="submittingUser">Submitting User: </label>
 						<div class="col-sm-2">
@@ -64,7 +64,7 @@
 						<div class="col-sm-2">
 						<button id="quotesubmitbtn" type="submit" class="btn btn-default">Submit Quote</button>
 						</div>
-					
+					</div>
 				
 					
 		
