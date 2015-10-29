@@ -1,4 +1,5 @@
 /bin/
 /target/
-WebContent/.DS_Store
+/*.DS_Store
+/WebContent/.DS_Store
 /Database/*
