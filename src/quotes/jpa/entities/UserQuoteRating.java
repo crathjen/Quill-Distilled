@@ -1,6 +1,7 @@
 package quotes.jpa.entities;
 
-import javax.persistence.CascadeType;
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,10 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @IdClass(UQRID.class)
 @Table(name="user_quote_rating")
-public class UserQuoteRating {
+public class UserQuoteRating implements Serializable{
 	
 	@Id
 	@Column(name="reg_user")
@@ -23,7 +26,7 @@ public class UserQuoteRating {
 	private int quoteID;
 	
 	
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="quote_id", insertable=false, updatable=false)
 	private Quotation quotation;
@@ -67,7 +70,8 @@ public class UserQuoteRating {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="reg_user", insertable=false, updatable=false)
 	private User user;

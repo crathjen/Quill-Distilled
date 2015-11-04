@@ -36,6 +36,9 @@ public interface SearchService {
 	public List<Quotation> findQuotesByAuthorFN(String searchExpression);
 	
 	@Transactional
+	public List<Quotation> findQuotesByAuthorString(String searchExpression);
+	
+	@Transactional
 	public List<Quotation> findQuotesByAuthorID(String searchExpression);
 	
 	@Transactional

@@ -35,7 +35,57 @@ $(document).ready(function() {
 			$(".user").css("display","none");
 			$(".login").css("display","block");
 		}
+	});
+	
+	var firstQuote=$($("#quoteResults .quote")[0]);
+	var pig = $("#piggify");
+	pig.click(function(){
+		$.ajax({
+			url: "/Quotes/REST/piggify",
+			method: "post",
+			data: "quoteText="+$($("#quoteResults .quote")[0]).html(),
+			success: function(data){
+				$($("#quoteResults .quote")[0]).html(data);
+			},
+			error: ajaxerror
+		})
 	})
+	
+	$("#cipherEncrypt").click(function(){
+		$.ajax({
+			url: "/Quotes/REST/cipherEncrypt",
+			method: "post",
+			data: "quoteText="+$($("#quoteResults .quote")[0]).html()+"&key="+$("#cipherKey").val(),
+			success: function(data){
+				$($("#quoteResults .quote")[0]).html(data);
+			},
+			error: ajaxerror
+		})
+	})
+	$("#cipherDecrypt").click(function(){
+		$.ajax({
+			url: "/Quotes/REST/cipherDecrypt",
+			method: "post",
+			data: "quoteText="+$($("#quoteResults .quote")[0]).html()+"&key="+$("#cipherKey").val(),
+			success: function(data){
+				$($("#quoteResults .quote")[0]).html(data);
+			},
+			error: ajaxerror
+		})
+	})
+	
+	$("#cipherHack").click(function(){
+		$.ajax({
+			url: "/Quotes/REST/cipherHack",
+			method: "post",
+			data: "quoteText="+$($("#quoteResults .quote")[0]).html(),
+			success: function(data){
+				$($("#quoteResults .quote")[0]).html(data);
+			},
+			error: ajaxerror
+		})
+	})
+	
 	
 //	var submitqt = $("#submitqtbtn")
 //	submitqt.click(function(){

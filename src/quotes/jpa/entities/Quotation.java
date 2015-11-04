@@ -1,5 +1,6 @@
 package quotes.jpa.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,7 +17,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Quotation {
+public class Quotation implements Serializable{
 
 
 	@Id

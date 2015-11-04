@@ -19,7 +19,7 @@
 		<c:if test="${!empty user.ratedAuthors}">
 			<ul id="userauthorRatings">
 				<c:forEach var="authorRating" items="${user.ratedAuthors}">
-					<li>${authorRating}</li>
+					<li>${authorRating.author.lastName}${authorRating.rating}</li>
 				</c:forEach>
 			</ul>
 		</c:if>
@@ -29,7 +29,7 @@
 		<c:if test="${!empty user.ratedQuotes}">
 			<ul id="userQuoteRatings">
 				<c:forEach var="quoteRating" items="${user.ratedQuotes}">
-					<li>${quoteRating}</li>
+					<li>${quoteRating.quotation.quoteText}${quoteRating.rating}</li>
 				</c:forEach>
 			</ul>
 		</c:if>

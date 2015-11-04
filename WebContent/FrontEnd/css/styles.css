@@ -11,6 +11,7 @@ body{
   margin: 7px;
   padding: 7px 6px 0;
   background: -webkit-linear-gradient(#9999FF, #D5D5F6, #7A7ACC, #7A7ACC);
+  background: -moz-linear-gradient(#9999FF, #D5D5F6, #7A7ACC, #7A7ACC);
   border: solid 2px purple;
   border-left: solid 6px purple;
   border-bottom: solid 6px purple;
@@ -102,6 +103,7 @@ body{
 
 #menu a, 
 #menu a:link {
+  text-align:center;
   font-weight: bold;
   font-size: 16px;
   color: #e7e5e5;
@@ -115,10 +117,21 @@ body{
   -moz-border-radius: 5px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
-
+#cipherEncrypt{
+	clear:left;
+}
+#cipherKey{
+	margin-top:2px;
+}
+#cipherKeyLabel{
+	text-shadow:none !important; 
+	background:orange !important;
+	color:white !important;
+}
 
 #menu .active a, 
 #menu li:hover a {
+  cursor:pointer;
   background: #B9B9F0;
   color: #444;
   transition-duration:.4s;
@@ -144,7 +157,7 @@ body{
 	
 	
 }
-#menu li:hover ul li:hover a{
+#menu li:hover ul li:hover>a{
 	text-shadow:none;
 	background:orange;
 	color:white;
@@ -157,23 +170,38 @@ body{
 	border-radius: 0px;
 	width:100px !important;
 }
+
 #menu li ul{
-	
+	padding-left:30px;
 	position:absolute;
 	transition-duration:1.5s;
 	display:none;
+}
+#menu li ul li ul {
+	display:none;
+	position:absolute;
+	left:100px;
+	top:10px;
+	padding-left:0px;
+	width:300px;
+	background:transparent;
+	background:orange;
+}
+#menu li ul li ul li{
+	float:left;
+	position:relative;
 }
 
 @keyframes fadein{
 	from{opacity:0;}
 	to{opacity:1;}
 }
-#menu li:hover ul{
+#menu li:hover>ul{
 	
 	transition-duration:1.5s;
 	z-index:10;
 	display:block;
-	padding-left:30px;
+	
 	text-shadow:none;
 	animation: fadein .8s;
 }
@@ -259,6 +287,7 @@ body{
 	
 	border-radius:8px;
 	background:-webkit-linear-gradient(lightblue, white, lightblue);
+	background:-moz-linear-gradient(lightblue, white, lightblue);
 	margin-left:5px;
 	margin-right:5px;
 	margin-bottom:10px;
@@ -266,7 +295,11 @@ body{
 }
 #quoteResults>li:nth-child(2n){
 	background:-webkit-linear-gradient(lightgreen, #90EEBF, lightgreen);
+	background:-moz-linear-gradient(lightgreen, #90EEBF, lightgreen);
 	align-self:flex-end;
+}
+#quoteResults>li.userRated{
+	background:orange;
 }
 #quoteResults>li>*{
 	padding:12px;
@@ -284,6 +317,9 @@ span.author, span.tag, span.book {
 	padding:3px;
 	margin:2px;
 	transition-duration:.6s;
+}
+span.tag.userLikee, span.author.userRated{
+	background:orange;
 }
 span.author:hover, span.tag:hover, span.book:hover{
 	background:red;
@@ -312,7 +348,7 @@ div.author>*{
 	float:left;
 
 }
-#quoteResults div.opine:not(.tag){
+#quoteResults div.opine:not(.tag):not(.edit){
 	font-size:0px;
 	opacity:
 }
@@ -334,7 +370,7 @@ div.opine{
 
 
 
-span:hover+div.opine, div.opine:hover, li:hover div.opine.qt{
+span:hover+div.opine, div.opine:hover, li:hover div.opine.qt, li:hover div.opine.edit{
 	display:inline-block;
 	opacity:0%;
 	animation: FadeInRating .8s;
@@ -348,6 +384,10 @@ span.tag:hover+div.opine, span.tag+div.opine:hover{
 	animation:growOutLike .8s;
 	width:40px;
 	
+}
+span.tag:hover+div.opine.unlike, span.tag+div.opine.unlike:hover{
+	animation:growOutUnlike 1.2s;
+	width:60px;
 }
 
 div.opine.qt{
@@ -366,7 +406,16 @@ div.opine.qt{
 	from{width:0px;}
 	to{width:40px;}
 }
+@keyframes growOutUnlike{
+	from{width:0px;}
+	to{width:60px;}
+}
 #quoteSubmission input[data-id]{
 	background:lightgreen;
+}
+li.quotecontainer div.edit{
+	float:right; 
+	width:40px !important;
+	margin-right:5px;
 }
 

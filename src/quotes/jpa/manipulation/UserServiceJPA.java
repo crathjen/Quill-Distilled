@@ -30,11 +30,11 @@ public class UserServiceJPA implements UserService, UserDetailsService {
 	@Transactional
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		if (em!=null){
-			System.out.println("there is an entity manager");
+		
+			
 		List<User> details = em.createQuery("select u from User u where u.username = ?1", User.class).setParameter(1, username).getResultList();
 		if (details.size()>0 && details.get(0)!=null)
-		return details.get(0);}
+		return details.get(0);
 	
 		throw new UsernameNotFoundException("Sorry, that is not a valid username.");
 	}

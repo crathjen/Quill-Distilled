@@ -19,11 +19,10 @@
 						</span>
 					</div>
 
-					<select class="form-control" name="searchType">
-						<option value="authorLN" selected>Author's Last Name</option>
+					<select class="form-control" name="searchType" id="searchType">
+						<option value="author" selected>Author</option>
 						<option value="tag">Tag</option>
 						<option value="quoteText">Quote Text</option>
-						<option value="authorFN">Author's Full Name</option>
 						<option value="bookTitle">Book Title</option>
 					</select>
 					<!-- <input class="form-control" type="submit" value="Search for Quotes"/> -->
@@ -34,14 +33,22 @@
 	<hr>
 	<ul>
 		<li><a id="randombtn"><!-- href="/Quotes/search/random" -->Get Random Quote</a></li>
-		<li><a id="submitqtbtn">Submit a Quote</a></li>
 		<li><a id="wordPlay">WordPlay</a>
 			<ul>
-				<li><a>Cipher Service</a></li>
-				<li><a>Piggify</a></li>
-			
+				<li><a>Cipher Service</a>
+					<ul>
+						<li><a id="cipherKeyLabel" >key</a></li>
+						<li><input class= "form-control" type="number" id ="cipherKey"></li>
+						<li id="cipherEncrypt"><a>encrypt</a></li>
+						<li><a id="cipherDecrypt">decrypt</a></li>
+						<li><a id="cipherHack">hack</a></li>
+					</ul>
+				</li>
+				<li><a id="piggify">Piggify</a></li>
 			</ul>
 		</li>
+		<li><a id="d3btn">D3</a></li>
+		<li class="user"><a id="submitqtbtn">Submit a Quote</a></li>
 		
 		
 		

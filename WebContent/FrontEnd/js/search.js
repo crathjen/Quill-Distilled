@@ -13,16 +13,50 @@ $(document).ready(function(){
 		function ajaxerror(){}
 	})
 	var searchbtn=$("#menuSearchBtn")
+	$("#searchExpression").autocomplete({
+		source: function(request, response){
+			$("#searchExpression").removeAttr("data-id").removeAttr("data-searchType");
+			$.ajax({
+				url : "/Quotes/REST/searchAC",
+				method: "post",
+				dataType: "json",
+				data: $("#menuSearchForm").serialize(),
+				success: function(data){
+					$.each(data, function(){
+						if(this.firstName!==null)
+							this.value=this.firstName+" "+this.lastName;
+							else this.value=this.lastName;
+						
+					})
+					response(data)
+					
+				}	
+			})
+		},
+		select: function(evt, ui){
+			$("#searchExpression").attr("data-id", ui.item.id).attr("data-searchType", $("#searchType").val())
+			
+		}
+	})
 	searchbtn.click(function(){
 		//console.log($("#menuSearchForm").serialize())
-		$.ajax({
-			url : "/Quotes/REST/search",
-			method: "post",
-			dataType: "json",
-			data: $("#menuSearchForm").serialize(),
-			success: quotelistajaxsuccess,
-			error: ajaxerror
-		})
+		var ajxData;
+		if(!$(this).parent().prev().attr("data-id")){
+			ajxData=$("#menuSearchForm").serialize();
+			console.log("in normal search")
+			}
+		else if($(this).parent().prev().attr("data-searchType")==="author"){
+			console.log("in else if")
+			ajxData="searchType=authorID&searchExpression="+$(this).parent().prev().attr("data-id");}
+			$.ajax({
+				url : "/Quotes/REST/search",
+				method: "post",
+				dataType: "json",
+				data: ajxData,
+				success: quotelistajaxsuccess,
+				error: ajaxerror
+			})
+		
 		function ajaxerror(e){
 			console.log(e)
 		}
@@ -30,56 +64,75 @@ $(document).ready(function(){
 	})
 	
 })
+var dfr=[];
 function linkSearchResults(){
+	
 	if (user){
-		var rating=$("<div class='opine'></div>");
-		rating.insertAfter("span.author");
-		$("div.opine:not(.qt):not(.tag)").raty({
-			click: function(score){
-				console.log(score);
-				console.log($(this).prev().attr("data-id"))
-				$.ajax({
-					url: "/Quotes/REST/updateUser/addAuthorRating",
-					method: "post",
-					data: "authorID="+$(this).prev().attr("data-id")+"&score="+score,
-					error: ajaxerror
-					
-				})
-			}	
-		});
+		$.when(dfr[1]).done(function(){
+			var rating=$("<div class='opine'></div>");
+			rating.insertAfter("span.author");
+			$("div.opine:not(.qt):not(.tag)").raty({
+				score: function(){return $(this).prev().attr("data-ratyscore");},
+				click: function(score){
+					console.log(score);
+					console.log($(this).prev().attr("data-id"))
+					$(this).prev().addClass("userRated")
+					$.ajax({
+						url: "/Quotes/REST/updateUser/addAuthorRating",
+						method: "post",
+						data: "authorID="+$(this).prev().attr("data-id")+"&score="+score,
+						error: ajaxerror
+						
+					})
+				}	
+			});
+		})
 		//.each(function(index, elly){var tempstr = elly.innerHTML;elly.innerHTML=tempstr.replace(/&nbsp;/g,"");});
-		rating=$("<div class='opine qt'></div>")
-		$(".quoteinfocontainer").append(rating);
-		$("div.opine.qt").raty({
-			click: function(score){
-				console.log(score)
-				console.log($(this).parent().prev().attr("data-id"))
-				$.ajax({
-					url: "/Quotes/REST/updateUser/addQuoteRating",
-					method: "post",
-					data: "quoteID="+$(this).parent().prev().attr("data-id")+"&score="+score,
-					error: ajaxerror
-					
-				})
-			}
+		$.when(dfr[1]).done(function(){	
+			rating=$("<div class='opine qt'></div>")
+			$(".quoteinfocontainer").append(rating).append($("<div class='edit opine'>edit</div>"));
+			$("div.opine.qt").raty({
+				score: function(){
+					return $(this).parent().prev().attr("data-ratyscore");
+				},
+				click: function(score){
+					console.log(score)
+					console.log($(this).parent().prev().attr("data-id"))
+					$(this).parent().parent().addClass("userRated");
+					$.ajax({
+						url: "/Quotes/REST/updateUser/addQuoteRating",
+						method: "post",
+						data: "quoteID="+$(this).parent().prev().attr("data-id")+"&score="+score,
+						error: ajaxerror
+						
+					})
+				}
+			});
 		});
 		
 		//$("#quoteResults").
-		
-		var like=$("<div class='opine tag'>Like</div>");
-		$("span.tag").after(like);
-		
-		$("#quoteResults").on("click", ".opine.tag", function(){
-			console.log($(this).prev().attr("data-id"));
-			$.ajax({
-				url: "/Quotes/REST/updateUser/addInterest",
-				method: "post",
-				//dataType: "json",
-				data: "tagID="+$(this).prev().attr("data-id"),
-				error: ajaxerror
+		$.when(dfr[1]).done(function(){
+			var like=$("<div class='opine tag like'>Like</div>");
+			$("span.tag:not(.userLikee)").after(like);
+			
+			$("#quoteResults").on("click", ".opine.tag.like", function(){
+				console.log($(this).prev().attr("data-id"));
+				$.ajax({
+					url: "/Quotes/REST/updateUser/addInterest",
+					method: "post",
+					//dataType: "json",
+					data: "tagID="+$(this).prev().attr("data-id"),
+					error: ajaxerror
+				})
 			})
+			var unlike=$("<div class='opine tag unlike'>Unlike</div>");
+			$("span.tag.userLikee").after(unlike);
 		})
-	}
+		
+
+		
+		
+	}//end user if
 	
 	$("#quoteResults").on("click", "span.author", function(evt){
 	//$("span.author").click(function(evt){
@@ -120,7 +173,30 @@ function linkSearchResults(){
 }
 function ajaxerror(){}
 function quotelistajaxsuccess(quotelist,status){
-			//console.log(quotelist)
+			dfr[0]=$.Deferred();
+			dfr[1]=$.Deferred();//console.log(quotelist)
+			if(user){
+				$.ajax({
+					url: "/Quotes/REST/user",
+					success: function(ajxUser){
+						$.when(dfr[0]).done(function(){
+							$.each(ajxUser.userInterests, function(){
+								$("span.tag[data-id='"+this.id+"']").addClass("userLikee");
+								
+							})
+							console.log(ajxUser);
+							$.each(ajxUser.ratedAuthors, function(){
+								$("span.author[data-id='"+this.authorID+"']").addClass("userRated").attr("data-ratyscore", this.rating);
+								
+							})
+							$.each(ajxUser.ratedQuotes, function(){
+								$("div.quote[data-id='"+this.quoteID+"']").attr("data-ratyscore", this.rating).parent().addClass("userRated");
+							})
+							dfr[1].resolve();
+					})
+					}
+				})
+			}else{$.when(dfr[0]).done(dfr[1].resolve)}
 			var qlist = $("<ul id=\"quoteResults\"></ul>")
 			for (var i=0;i<quotelist.length;i++){
 				//console.log(typeof quotelist[i])
@@ -161,5 +237,6 @@ function quotelistajaxsuccess(quotelist,status){
 				console.log("change bodyContent")
 				$(".bodyContent").html(qlist);
 			}
+			dfr[0].resolve();
 			linkSearchResults();
 		}

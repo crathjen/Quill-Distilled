@@ -1,5 +1,7 @@
 package quotes.jpa.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,18 +10,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @IdClass(UARID.class)
 @Table(name="user_author_rating")
-public class UserAuthorRating {
+public class UserAuthorRating implements Serializable{
 	
 	@Id
 	@Column(name="reg_user")
 	private String userName;
 	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="reg_user", insertable=false, updatable=false)
+	private User user;
+	
 	@Id
 	@Column(name="author_id")
 	private int authorID;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="author_id", insertable=false, updatable=false)
+	private Author author;
 	
 	
 	public int getRating() {
@@ -46,14 +60,22 @@ public class UserAuthorRating {
 		this.authorID = authorID;
 	}
 
-	@ManyToOne
-	@JoinColumn(name="reg_user", insertable=false, updatable=false)
-	private User user;
 	
-	@ManyToOne
-	@JoinColumn(name="author_id", insertable=false, updatable=false)
-	private Author author;
-	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
+	}
 	@Column
 	private int rating;
 

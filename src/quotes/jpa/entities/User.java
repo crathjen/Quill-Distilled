@@ -18,6 +18,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="registered_user")
 public class User implements UserDetails, Serializable{
@@ -31,12 +33,15 @@ public class User implements UserDetails, Serializable{
 	@Column(name="user_name")
 	private String username;
 	
+	@JsonIgnore
 	@Column
 	private String password;
 	
+	@JsonIgnore
 	@Column
 	private String email;
 	
+	@JsonIgnore
 	@Column(name="trust_factor")
 	private int trustFactor;
 	

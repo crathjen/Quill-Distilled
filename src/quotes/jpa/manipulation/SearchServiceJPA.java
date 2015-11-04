@@ -1,5 +1,6 @@
 package quotes.jpa.manipulation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -72,6 +73,27 @@ public class SearchServiceJPA implements SearchService {
 		
 		List<Quotation> results = em.createQuery("select q from Quotation q where UPPER(concat(concat(q.author.firstName,' '),q.author.lastName)) = UPPER(?1)", Quotation.class).setParameter(1,searchExpression).getResultList();
 		//System.out.println(results);
+		return results;
+	}
+	@Override
+	public List<Quotation> findQuotesByAuthorString(String searchExpression){
+		String[] autharr = searchExpression.split(" ");
+		List<Quotation> results = new ArrayList();
+		if(searchExpression!="")
+		for (String s : autharr) {
+			s="%"+s.toUpperCase()+"%";
+			//System.out.println(s);
+			List<Quotation> tempresults = em
+					.createQuery("select q from Quotation q where upper(q.author.firstName) like ?1 or upper(q.author.lastName) like ?1",
+							Quotation.class)
+					.setParameter(1, s).setMaxResults(50).getResultList();
+			//System.out.println(tempresults.size());
+			for (Quotation q: tempresults){
+				if (!results.contains(q))
+					results.add(q);
+			}
+			
+		}
 		return results;
 	}
 
