@@ -18,6 +18,14 @@ $(document).ready(function() {
 		})
 
 	})
+	$("#signupbtn").click(function(){
+		$.ajax({
+			url: "/Quotes/navigate/signUp",
+			dataType: "html",
+			success: loadSubmitForm
+			
+		})
+	})
 	var home = $("#homebtn")
 	home.click(function(){
 		$.ajax({

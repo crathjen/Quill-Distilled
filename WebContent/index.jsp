@@ -19,6 +19,7 @@
 
 <link rel="stylesheet" href="FrontEnd/css/styles.css">
 <link rel="stylesheet" href="FrontEnd/jQueryRaty/jquery.raty.css">
+<link rel="shortcut icon" href="FrontEnd/images/oncemore.ico?" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Quill Distilled</title>
 
@@ -27,5 +28,6 @@
 
 <c:import url="Menu.jsp"></c:import>
 <div class="bodyContent"></div>
+<c:import url="footer.jsp"></c:import>
 </body>
 </html>

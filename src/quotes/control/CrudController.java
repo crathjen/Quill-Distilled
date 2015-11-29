@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,12 +41,10 @@ public class CrudController {
 		if(author!="")
 		for (String s : autharr) {
 			s="%"+s.toUpperCase()+"%";
-			//System.out.println(s);
 			List<Author> tempresults = em
 					.createQuery("select a from Author a where upper(a.firstName) like ?1 or upper(a.lastName) like ?1",
 							Author.class)
 					.setParameter(1, s).getResultList();
-			//System.out.println(tempresults.size());
 			for (Author a: tempresults){
 				if (!results.contains(a))
 					results.add(a);
@@ -57,10 +56,11 @@ public class CrudController {
 	@ResponseBody
 	@RequestMapping(path="/submitvalidation/tag")
 	public List<SubjectTag> getTagMatches(String tag){
-		String s="%"+tag.toUpperCase()+"%";
+		String s=tag.toUpperCase()+"%";
 		List<SubjectTag> results=em.createQuery("select t from SubjectTag t where upper(t.tagText) like ?1", SubjectTag.class).setParameter(1, s).getResultList();
 		return results;
 	}
+	
 	@ResponseBody
 	@Transactional
 	@RequestMapping(path="/updateUser/addInterest")
@@ -76,25 +76,27 @@ public class CrudController {
 		}
 		return null;
 	}
+	
 	@ResponseBody
 	@Transactional
 	@RequestMapping(path="/updateUser/addQuoteRating")
 	public String addQuoteRating(String quoteID, String score, Principal principal){
 		try{
-		User user = em.find(User.class,  principal.getName());
-		//Quotation quote = em.createQuery("select q from Quotation q where q.id=?1", Quotation.class).setParameter(1, Integer.parseInt(quoteID)).getResultList().get(0);
-		UserQuoteRating uqr = new UserQuoteRating();
-		//uqr.setQuotation(quote);
-		//uqr.setUser(user);
-		uqr.setRating(Integer.parseInt(score));
-		uqr.setQuoteID(Integer.parseInt(quoteID));
-		uqr.setUserName(user.getUsername());
-		em.merge(uqr);
+			User user = em.find(User.class,  principal.getName());
+			//Quotation quote = em.createQuery("select q from Quotation q where q.id=?1", Quotation.class).setParameter(1, Integer.parseInt(quoteID)).getResultList().get(0);
+			UserQuoteRating uqr = new UserQuoteRating();
+			//uqr.setQuotation(quote);
+			//uqr.setUser(user);
+			uqr.setRating(Integer.parseInt(score));
+			uqr.setQuoteID(Integer.parseInt(quoteID));
+			uqr.setUserName(user.getUsername());
+			em.merge(uqr);
 		}catch(Exception e){
 			System.out.println(e);
 		}
 		return null;
 	}
+	
 	@ResponseBody
 	@Transactional
 	@RequestMapping(path="/updateUser/addAuthorRating")
@@ -111,4 +113,8 @@ public class CrudController {
 		return null;
 	}
 	
+	@RequestMapping(path="/{page}")
+	public String routeToHTMLPage (@PathVariable String page){
+		return page;
+	}
 }

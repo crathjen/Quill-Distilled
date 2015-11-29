@@ -10,7 +10,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 
     
-    <mapping-file>META-INF/orm.xml</mapping-file>
+  
 
     <class>quotes.jpa.entities.Author</class>
     <class>quotes.jpa.entities.Quotation</class>

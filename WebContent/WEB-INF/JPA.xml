@@ -35,11 +35,8 @@
   />
   
   <bean class="quotes.jpa.manipulation.SearchServiceJPA" autowire="byType"/>
-  
-  <bean class="quotes.jpa.daos.AuthorDAO" autowire="byType"/>
-  <bean class="quotes.jpa.daos.QuoteSourceDAO" autowire="byType"/>
-  <bean class="quotes.jpa.daos.SubjectTagDAO" autowire="byType"/>
-  <bean class="quotes.jpa.daos.QuotationDAO" autowire="byType"/>
-  <bean class="quotes.jpa.test.DBLoader" autowire="byType"/>
+ 
+  <bean class="quotes.jpa.daos.CompositeDAO" autowire="byType"/>
+  <bean class="quotes.jpa.daos.DBLoader" autowire="byType"/>
 
 </beans>

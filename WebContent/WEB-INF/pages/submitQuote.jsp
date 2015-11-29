@@ -2,6 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+	
+	
+
 				<form id="quoteSubmission" class="form-horizontal" action="">
 					<fieldset>
 					<legend>Submit a Quote</legend>
@@ -71,3 +74,4 @@
 	</fieldset>
 
 	</form>
+	

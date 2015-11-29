@@ -1,4 +1,4 @@
-package quotes.jpa.test;
+package quotes.jpa.daos;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,10 +15,6 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import quotes.jpa.daos.AuthorDAO;
-import quotes.jpa.daos.QuotationDAO;
-import quotes.jpa.daos.QuoteSourceDAO;
-import quotes.jpa.daos.SubjectTagDAO;
 import quotes.jpa.entities.Author;
 import quotes.jpa.entities.Quotation;
 import quotes.jpa.entities.QuoteSource;
@@ -29,14 +25,15 @@ public class DBLoader {
 	@Autowired
 	@PersistenceContext(unitName="EMF")
 	protected EntityManager em;
-	@Autowired
-	protected AuthorDAO aDAO;
-	@Autowired	
-	protected QuotationDAO qDAO;
-	@Autowired
-	protected SubjectTagDAO stDAO;
-	@Autowired
-	protected QuoteSourceDAO qsDAO;
+//	@Autowired
+//	protected AuthorDAO aDAO;
+//	@Autowired	
+//	protected QuotationDAO qDAO;
+//	@Autowired
+//	protected SubjectTagDAO stDAO;
+//	@Autowired
+//	protected QuoteSourceDAO qsDAO;
+	@Autowired CompositeDAO dAO;
 	
 
 	@Transactional
@@ -91,14 +88,14 @@ public class DBLoader {
 		
 		a.setFirstName(aFirstName);
 		a.setLastName(aLastName);
-		a=aDAO.authorExists(a);
+		a=dAO.authorExists(a);
 //		t.begin();
 		a=em.merge(a);
 //		t.commit();
 		
 		s.setAuthor(a);
 		s.setSourceTitle(workTitle);
-		s=qsDAO.sourceExists(s);
+		s=dAO.sourceExists(s);
 //		t.begin();
 		//if(s!=null&&s.getSourceTitle()!=null)
 		if(s!=null&&s.getSourceTitle()!=null){
@@ -111,7 +108,7 @@ public class DBLoader {
 		for(String stringTag: alTags){
 			SubjectTag workingTag = new SubjectTag();
 			workingTag.setTagText(stringTag);
-			workingTag=stDAO.tagExists(workingTag);
+			workingTag=dAO.tagExists(workingTag);
 			//t.begin();
 			workingTag=em.merge(workingTag);
 			//t.commit();
@@ -120,7 +117,7 @@ public class DBLoader {
 		//q=em.merge(q);
 		q.setAuthor(a);
 		q.setQuoteText(quoteText);
-		q=qDAO.quotationExists(q);
+		q=dAO.quotationExists(q);
 		q=em.merge(q);
 		//System.out.println("terminator");
 		//if (q.getTags()==null)

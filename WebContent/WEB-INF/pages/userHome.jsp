@@ -35,6 +35,4 @@
 		</c:if>
 	</div>
 	<h5>Content You've Submitted</h5>
-
-
 </div>

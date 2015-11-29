@@ -1,12 +1,14 @@
+
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<sec:authentication var ="user" property="principal"/>
+<sec:authentication var="user" property="principal" />
 <div id="menu">
 
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-6 col-xs-12">
-				<img src="/Quotes/FrontEnd/images/large_title_graphic.png">
+				<img alt="quill and still for inkpot" src="/Quotes/FrontEnd/images/stills.svg">
+				<span>The Quill Distilled</span>
 			</div>
 			<div id="searchForm" class="col-sm-6 col-xs-12">
 				<form id="menuSearchForm" class="form-inline" action="/Quotes/search" method=post>
@@ -52,8 +54,9 @@
 		
 		
 		
+		
 <%-- 		<c:if test="${user.equals(\"anonymousUser\")}"> --%>
-			<li class="login"><a>Sign Up</a></li>
+			<li class="login"><a id="signupbtn">Sign Up</a></li>
 			<li class="login"><form id="loginForm">
 				<input id="username" name="username" placeholder="username"></input><input
 					id="password" name="password" type="password" placeholder="password"></input><a
@@ -61,7 +64,7 @@
 			</form></li>
 <%-- 		</c:if> --%>
 <%-- 		<c:if test="${!user.equals(\"anonymousUser\")}"> --%>
-			<li id="user" class="user"><a><c:if test="${!user.equals(\"anonymousUser\")}">${user.username}</c:if></a>
+			<li id="user" class="user"><a><c:if test="${!user.equals('anonymousUser')}" >${user.username}</c:if></a>
 			<ul>
 				<li><a id="homebtn">Home</a></li>
 				<li><a>Account Summary</a></li>

@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,37 +51,45 @@ public class ServiceController {
 		al.add(ss.getRandomQuote());
 		return al;
 	}
+	
 	@RequestMapping(path="/search", params="searchType=author", produces="application/json")
 	public List<Quotation> authorSearch(String searchExpression){
 		return ss.findQuotesByAuthorString(searchExpression);
 	}
+	
 	@RequestMapping(path="/search", params="searchType=authorFN", produces="application/json")
 	public List<Quotation> authorSearchFN(String searchExpression){
 		//System.out.println(searchExpression);
 		return ss.findQuotesByAuthorFN(searchExpression);
 	}
+	
 	@RequestMapping(path="/search", params="searchType=bookTitle", produces="application/json")
 	public List<Quotation> sourceSearch(String searchExpression){
 		//System.out.println(searchExpression);
 		return ss.findQuotesBySourceTitle(searchExpression);
 	}
+	
 	@RequestMapping(path="/search", params="searchType=authorID", produces="application/json")
 	public List<Quotation> authorIDSearch(String searchExpression){
 		return ss.findQuotesByAuthorID(searchExpression);
 	}
+	
 	@RequestMapping(path="/search", params="searchType=bookTitleID", produces="application/json")
 	public List<Quotation> sourceIDSearch(String searchExpression){
 		return ss.findQuotesBySourceID(searchExpression);
 	}
+	
 	@RequestMapping(path="/search", params="searchType=quoteText", produces="application/json")
 	public List<Quotation> qTextSearch(String searchExpression){
 		searchExpression="%"+searchExpression+"%";
 		return em.createQuery("select q from Quotation q where q.quoteText like ?1", Quotation.class).setParameter(1, searchExpression).setMaxResults(40).getResultList();
 	}
+	
 	@RequestMapping(path="/search", params="searchType=tagID", produces="application/json")
 	public List<Quotation> tagIDSearch(String searchExpression){
 		return ss.findQuotesByTagID(searchExpression);
 	}
+	
 	@Transactional
 	@RequestMapping(path="/user", produces="application/json")
 	public User getUserInfo(Principal principal){
@@ -88,15 +97,14 @@ public class ServiceController {
 		em.refresh(userResult);
 		return userResult;
 	}
+	
 	@RequestMapping(path="/searchAC", produces="application/json")
 	public List getAutocompleteValues(String searchExpression, String searchType){
 		if (searchType.equals("author")){
 			return cc.getAuthorMatches(searchExpression);
 					//em.createQuery("select a from Author a where upper(a.lastName) like ?1").setParameter(1, "%"+searchExpression+"%").getResultList();
 		}else if (searchType.equals("tag")){
-			return null;
-		}else if (searchType.equals("bookTitle")){
-			return null;
+			return cc.getTagMatches(searchExpression);
 		}else
 		
 		
@@ -112,16 +120,19 @@ public class ServiceController {
 		
 		return pigger.compileTranslation();
 	}
+	
 	@RequestMapping(path="/cipherEncrypt", produces="text/plain")
 	public String cipherEncrypt(String quoteText, String key){
 		System.out.println(quoteText);
 		return new Cipher(Integer.parseInt(key)).cipherMessage(quoteText);
 	}
+	
 	@RequestMapping(path="/cipherDecrypt", produces="text/plain")
 	public String cipherDecrypt(String quoteText, String key){
 		System.out.println(quoteText);
 		return new Decipher(Integer.parseInt(key)).decipherMessage(quoteText);
 	}
+	
 	@RequestMapping(path="/cipherHack", produces="text/plain")
 	public String cipherHack(String quoteText){
 		System.out.println(quoteText);
@@ -130,8 +141,29 @@ public class ServiceController {
 		}catch(Exception e){System.out.println(e);}
 		return null;
 	}
-	@RequestMapping(path="/D3Data", produces="application/json")
-	public Object[] getD3Data(){
+	@RequestMapping(path="/D3DataTagBubble", produces="application/json")
+	public List getD3TagBubbleData(){
+		class Bubble{
+			public String name;
+			public int value;
+			Bubble(String s, int v){
+				name=s;
+				value=v;
+			}
+		}
+		List<Object[]> tempresult = em.createQuery("select s.tagText, size(s.taggedQuotes) from SubjectTag s", Object[].class).getResultList();
+				System.out.println(tempresult);
+		List result = new ArrayList();
+		for(Object[] a:tempresult){
+			if (((int)a[1])>5)
+			result.add(new Bubble((String)a[0], (int)a[1]));
+		}
+		System.out.println("returning" +result);
+		return result;
+	}
+	
+	@RequestMapping(path="/D3DataTagForce", produces="application/json")
+	public Object[] getD3TagForceData(){
 		
 		List<SubjectTag> result = em.createQuery("Select s from SubjectTag s where size(s.taggedQuotes)>13 order by s.id", SubjectTag.class).getResultList();
 		
@@ -203,6 +235,6 @@ public class ServiceController {
 		return tempobj;
 	}
 	
-	
+
 	
 }

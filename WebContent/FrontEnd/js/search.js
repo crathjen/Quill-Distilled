@@ -16,22 +16,30 @@ $(document).ready(function(){
 	$("#searchExpression").autocomplete({
 		source: function(request, response){
 			$("#searchExpression").removeAttr("data-id").removeAttr("data-searchType");
+			if($("#searchType").val()=="author"||$("#searchType").val()=="tag")
 			$.ajax({
 				url : "/Quotes/REST/searchAC",
 				method: "post",
 				dataType: "json",
 				data: $("#menuSearchForm").serialize(),
 				success: function(data){
-					$.each(data, function(){
+					if($("#searchType").val()=="author")
+					{$.each(data, function(){
 						if(this.firstName!==null)
 							this.value=this.firstName+" "+this.lastName;
 							else this.value=this.lastName;
 						
-					})
+					})}
+					else{
+						$.each(data, function(){
+							this.value=this.tagText;
+						})
+					}
 					response(data)
 					
 				}	
 			})
+			else response();
 		},
 		select: function(evt, ui){
 			$("#searchExpression").attr("data-id", ui.item.id).attr("data-searchType", $("#searchType").val())
@@ -48,6 +56,10 @@ $(document).ready(function(){
 		else if($(this).parent().prev().attr("data-searchType")==="author"){
 			console.log("in else if")
 			ajxData="searchType=authorID&searchExpression="+$(this).parent().prev().attr("data-id");}
+		else if($(this).parent().prev().attr("data-searchType")==="tag"){
+			console.log("tag id search")
+			ajxData="searchType=tagID&searchExpression="+$(this).parent().prev().attr("data-id");
+		}
 			$.ajax({
 				url : "/Quotes/REST/search",
 				method: "post",
@@ -173,6 +185,7 @@ function linkSearchResults(){
 }
 function ajaxerror(){}
 function quotelistajaxsuccess(quotelist,status){
+			$(".bodyContent").css("background", "black");
 			dfr[0]=$.Deferred();
 			dfr[1]=$.Deferred();//console.log(quotelist)
 			if(user){
