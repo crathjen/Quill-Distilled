@@ -418,6 +418,24 @@ li.quotecontainer div.edit{
 #docFooter hr{
 	margin:20px;
 }
+#docFooter h5{
+	color: whitesmoke;
+}
 #docFooter div:nth-child(2){
 	margin-left:50px;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    margin: 0 0 170px; /* bottom = footer height */
+}
+#docFooter {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 170px;
+    width: 100%;
 }

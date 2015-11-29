@@ -3,3 +3,8 @@
 /*.DS_Store
 /WebContent/.DS_Store
 /Database/*
+/.settings
+/.classpath
+/.project
+/.springBeans
+
