@@ -1,6 +1,8 @@
 package quotes.jpa.entities;
 
-public class UQRID {
+import java.io.Serializable;
+
+public class UQRID implements Serializable{
 	@Override
 	public int hashCode() {
 		final int prime = 31;

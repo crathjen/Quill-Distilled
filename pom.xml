@@ -1,8 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>Quotes</groupId>
 	<artifactId>Quotes</artifactId>
+	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -11,8 +16,35 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
 				<configuration>
-					<source />
-					<target />
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<webXml>WebContent/WEB-INF/web.xml</webXml>
+					<outputDirectory>
+						${project.basedir}
+					</outputDirectory>
+					<warName>Quotes</warName>
+					<webResources>
+						<resource>
+							<directory>
+								src/META-INF
+							</directory>
+							<target-path>
+							WEB-INF/classes/META-INF
+							</target-path>
+						</resource>
+						<resource>
+							<directory>
+								WebContent
+							</directory>
+						</resource>
+					</webResources>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -59,37 +91,37 @@
 			<version>1.2</version>
 		</dependency>
 
-<dependency>
-	<groupId>org.springframework.security</groupId>
-	<artifactId>spring-security-core</artifactId>
-	<version>4.0.2.RELEASE</version>
-</dependency>
-<dependency>
-	<groupId>org.springframework.security</groupId>
-	<artifactId>spring-security-web</artifactId>
-	<version>4.0.2.RELEASE</version>
-</dependency>
-<dependency>
-	<groupId>org.springframework.security</groupId>
-	<artifactId>spring-security-config</artifactId>
-	<version>4.0.2.RELEASE</version>
-</dependency>
-<dependency>
-	<groupId>org.springframework.security</groupId>
-	<artifactId>spring-security-taglibs</artifactId>
-	<version>4.0.2.RELEASE</version>
-</dependency>
-<dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-core</artifactId>
-        <version>2.3.3</version>
-    </dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>4.0.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.0.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.0.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>4.0.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.3.3</version>
+		</dependency>
 
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>2.3.3</version>
-</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.3.3</version>
+		</dependency>
 
 
 

@@ -1,6 +1,8 @@
 package quotes.jpa.entities;
 
-public class UARID {
+import java.io.Serializable;
+
+public class UARID implements Serializable{
 String userName;
 int authorID;
 @Override
