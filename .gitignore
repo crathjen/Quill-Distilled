@@ -1,6 +1,6 @@
 /bin/
 /target/
-/*.DS_Store
+*.DS_Store
 /WebContent/.DS_Store
 /Database/*
 /.settings
