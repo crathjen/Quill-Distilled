@@ -1,6 +1,6 @@
 # The Quill Distilled
 
-The Quill Distilled is a single-page web application for discovering and sharing quotations.  It runs on a Java backend running on Tomcat and utilizing Spring, REST, JPA, and a Derby Database.  Frontend technologies used in the project include JavaScript, jQuery, Ajax, and jQuery UI.  
+The Quill Distilled is a single-page web application for discovering and sharing quotations.  It runs on a Java backend deployed on Tomcat and utilizes Spring, REST, JPA, and a Derby Database.  Frontend technologies used in the project include JavaScript, jQuery, Ajax, and jQuery UI.  
 
 A working version of the project can be accessed at http://quilldistilled.com.
 
