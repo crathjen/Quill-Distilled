@@ -243,7 +243,7 @@ form legend{
   height: 0;
 }
 
-#quoteResults *{
+#quoteResults *:not(h2):not(h4):not(h5){
 	font-family: 'Alegreya', serif;
 	font-size: 19px;
 }
@@ -407,10 +407,16 @@ li.quotecontainer div.edit{
    
     font: normal 55px titleImage;
 }
+#menu img, #menu img+span{
+	cursor:pointer;
+}
 
-#docFooter div{
+#docFooter>div{
 	width:25%;
 	float:left;
+}
+#docFooter div div a{
+	display:inline;
 }
 #docFooter div a{
 	display:block;
@@ -421,7 +427,7 @@ li.quotecontainer div.edit{
 #docFooter h5{
 	color: whitesmoke;
 }
-#docFooter div:nth-child(2){
+#docFooter>div:nth-child(2){
 	margin-left:50px;
 }
 
@@ -438,4 +444,29 @@ body {
     bottom: 0;
     height: 170px;
     width: 100%;
+}
+#pdfContainer {
+	width: 900px;
+	height: 480px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.hasErrors{
+	background-color:red;
+	color:white;
+	
+}
+.validation{
+	color:red;
+}
+
+#indexWelcome{
+	background-color:white;
+	padding:14px;
+	margin:8px;
+	border-radius:6px;
+}
+.welcomeSplash h4{
+	margin-left:10px;
 }

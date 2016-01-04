@@ -13,28 +13,22 @@
 						<div class="col-sm-8">
 							<textarea class="form-control" rows="7" id="quoteText"></textarea>
 						</div>
-						<div class="col-sm-2 control-label validator">
-						validation
-						</div>
+						
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="author">Author* :</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" id="author" name="author">
 						</div>
-						<div class="col-sm-1 control-label authid">id</div>
-						<div class="col-sm-1 control-label validator">
-						validation
-						</div>
+						
+						
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="source">Source:</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" id="source">
 						</div>
-						<div class="col-sm-2 control-label validator">
-						validation
-						</div>
+					
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="tag1">Tags:</label>
@@ -51,9 +45,7 @@
 							<input type="text" class="form-control tag" id="tag4">
 						</div>
 			
-						<div class="col-sm-2 control-label validator">
-						validation
-						</div>
+				
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="rating">Your Rating (1-5): </label>
@@ -65,7 +57,7 @@
 							<input type="text" class="form-control tag" id="submittingUser">
 						</div>
 						<div class="col-sm-2">
-						<button id="quotesubmitbtn" type="submit" class="btn btn-default">Submit Quote</button>
+						<button id="quotesubmitbtn" type="button" onClick="alert('still working on this functionality: check back soon')"class="btn btn-default">Submit Quote</button>
 						</div>
 					</div>
 				

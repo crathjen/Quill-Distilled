@@ -12,7 +12,11 @@ $(document).ready(function(){
 		})
 		function ajaxerror(){}
 	})
-	var searchbtn=$("#menuSearchBtn")
+	var resume=$("#resume");
+	resume.click(function(){
+		$(".bodyContent").html("<div id='pdfContainer'><object data='/Quotes/FrontEnd/docs/RathjenResume.pdf' type='application/pdf' width='100%' height='100%'><p>It appears you don't have a PDF plugin for this browser.No biggie... you can <a href='/Quotes/FrontEnd/docs/RathjenResume.pdf'>click here todownload the PDF file.</a></p></object><div>")
+	})
+	
 	$("#searchExpression").autocomplete({
 		source: function(request, response){
 			$("#searchExpression").removeAttr("data-id").removeAttr("data-searchType");
@@ -46,6 +50,7 @@ $(document).ready(function(){
 			
 		}
 	})
+	var searchbtn=$("#menuSearchBtn")
 	searchbtn.click(function(){
 		//console.log($("#menuSearchForm").serialize())
 		var ajxData;
@@ -102,14 +107,14 @@ function linkSearchResults(){
 		//.each(function(index, elly){var tempstr = elly.innerHTML;elly.innerHTML=tempstr.replace(/&nbsp;/g,"");});
 		$.when(dfr[1]).done(function(){	
 			rating=$("<div class='opine qt'></div>")
-			$(".quoteinfocontainer").append(rating).append($("<div class='edit opine'>edit</div>"));
+			$(".quoteinfocontainer").append(rating)//.append($("<div class='edit opine'>edit</div>"));
 			$("div.opine.qt").raty({
 				score: function(){
 					return $(this).parent().prev().attr("data-ratyscore");
 				},
 				click: function(score){
-					console.log(score)
-					console.log($(this).parent().prev().attr("data-id"))
+					//console.log(score)
+					//console.log($(this).parent().prev().attr("data-id"))
 					$(this).parent().parent().addClass("userRated");
 					$.ajax({
 						url: "/Quotes/REST/updateUser/addQuoteRating",
@@ -125,19 +130,38 @@ function linkSearchResults(){
 		//$("#quoteResults").
 		$.when(dfr[1]).done(function(){
 			var like=$("<div class='opine tag like'>Like</div>");
+			var unlike=$("<div class='opine tag unlike'>Unlike</div>");
 			$("span.tag:not(.userLikee)").after(like);
 			
 			$("#quoteResults").on("click", ".opine.tag.like", function(){
 				console.log($(this).prev().attr("data-id"));
+				var clickedTag = $(this);
 				$.ajax({
 					url: "/Quotes/REST/updateUser/addInterest",
 					method: "post",
 					//dataType: "json",
 					data: "tagID="+$(this).prev().attr("data-id"),
+					success: function(){
+						console.log(clickedTag)
+						clickedTag.prev().addClass("userLikee");
+						clickedTag.replaceWith(unlike)
+					},
 					error: ajaxerror
 				})
 			})
-			var unlike=$("<div class='opine tag unlike'>Unlike</div>");
+			$("#quoteResults").on("click", ".opine.tag.unlike", function(){
+				var clickedTag = $(this);
+				$.ajax({
+					url: "/Quotes/REST/updateUser/removeInterest",
+					method: "post",
+					//dataType: "json",
+					data: "tagID="+$(this).prev().attr("data-id"),
+					success: function(){
+						clickedTag.prev().removeClass("userLikee");
+						clickedTag.replaceWith(like);
+					}
+				})
+			})
 			$("span.tag.userLikee").after(unlike);
 		})
 		
@@ -148,7 +172,7 @@ function linkSearchResults(){
 	
 	$("#quoteResults").on("click", "span.author", function(evt){
 	//$("span.author").click(function(evt){
-		console.log(evt.target.innerHTML)
+		//console.log(evt.target.innerHTML)
 		$.ajax({
 			url : "/Quotes/REST/search",
 			method: "post",
@@ -160,7 +184,7 @@ function linkSearchResults(){
 	})
 	$("#quoteResults").on("click", "span.tag", function(evt){
 	//$("span.tag").click(function(evt){
-		console.log(evt.target.innerHTML)
+		//console.log(evt.target.innerHTML)
 		$.ajax({
 			url : "/Quotes/REST/search",
 			method: "post",
@@ -172,7 +196,7 @@ function linkSearchResults(){
 	})
 	$("#quoteResults").on("click", "span.book", function(evt){
 	//$("span.book").click(function(evt){
-		console.log(evt.target.innerHTML)
+		//console.log(evt.target.innerHTML)
 		$.ajax({
 			url : "/Quotes/REST/search",
 			method: "post",
@@ -197,7 +221,7 @@ function quotelistajaxsuccess(quotelist,status){
 								$("span.tag[data-id='"+this.id+"']").addClass("userLikee");
 								
 							})
-							console.log(ajxUser);
+							//console.log(ajxUser);
 							$.each(ajxUser.ratedAuthors, function(){
 								$("span.author[data-id='"+this.authorID+"']").addClass("userRated").attr("data-ratyscore", this.rating);
 								
@@ -247,7 +271,7 @@ function quotelistajaxsuccess(quotelist,status){
 			if ($("body #quoteResults").length){
 				$("body #quoteResults").replaceWith(qlist)
 			}else{
-				console.log("change bodyContent")
+				//console.log("change bodyContent")
 				$(".bodyContent").html(qlist);
 			}
 			dfr[0].resolve();

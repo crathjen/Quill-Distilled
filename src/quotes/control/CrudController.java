@@ -64,13 +64,29 @@ public class CrudController {
 	@ResponseBody
 	@Transactional
 	@RequestMapping(path="/updateUser/addInterest")
-	public String addUserInterest(String tagID, HttpServletResponse response){
+	public String addUserInterest(String tagID){
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		try{
 			int tID=Integer.parseInt(tagID);
 			SubjectTag tag = em.createQuery("select t from SubjectTag t where t.id=?1", SubjectTag.class).setParameter(1, tID).getResultList().get(0);
 			user=em.find(User.class,user.getUsername());
 			user.addUserInterest(tag);
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	@ResponseBody
+	@Transactional
+	@RequestMapping("/updateUser/removeInterest")
+	public String removeUserInterest(String tagID){
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		try{
+			int tID=Integer.parseInt(tagID);
+			SubjectTag tag = em.createQuery("select t from SubjectTag t where t.id=?1", SubjectTag.class).setParameter(1, tID).getResultList().get(0);
+			user=em.find(User.class,user.getUsername());
+			user.removeUserInterest(tag);
 		}catch(Exception e){
 			System.out.println(e);
 		}

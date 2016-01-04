@@ -63,7 +63,8 @@ $(document).ready(function(){
 				var svg = d3.select(".bodyContent")
 							.insert("svg","svg")
 							.attr("width", w)
-							.attr("height", h);
+							.attr("height", h)
+							.attr("class", "force");
 				//Create edges as lines
 				var edges = svg.selectAll("line")
 					.data(data[1])
@@ -152,6 +153,9 @@ $(document).ready(function(){
 				
 //			}
 //		})
+		$("svg.force").before("<h4>Force Diagram showing connections between subject tags: thicker links indicate tags that appear together on quotes more often.  Try double-clicking nodes or dragging them!</h4>");
+		$("svg.bubble").before("<h4>Bubble Chart representing how often a tag is used to describe a quotation.  Bigger circles mean a tag is used more often.</h4>");
+	
 	})
 })
 	

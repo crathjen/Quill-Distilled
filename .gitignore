@@ -7,4 +7,7 @@
 /.classpath
 /.project
 /.springBeans
-
+/WebContent/FrontEnd/ca$h
+/WebContent/FrontEnd/docs
+/WebContent/WEB-INF/pages/ca$h.jsp
+/WebContent/FrontEnd/js/jquery-2.1.4.min.js

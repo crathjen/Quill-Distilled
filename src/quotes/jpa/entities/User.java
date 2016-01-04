@@ -41,6 +41,13 @@ public class User implements UserDetails, Serializable{
 	@Column
 	private String email;
 	
+	@Column(name="first_name")
+	private String firstName;
+	
+	@Column(name="last_name")
+	private String lastName;
+	
+
 	@JsonIgnore
 	@Column(name="trust_factor")
 	private int trustFactor;
@@ -54,7 +61,7 @@ public class User implements UserDetails, Serializable{
 	@ManyToMany(mappedBy="interestedUsers", fetch=FetchType.EAGER)
 	private List<SubjectTag> userInterests;
 
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER, cascade=CascadeType.REFRESH)
 	private List<UserAuthorRating> ratedAuthors;
 	
 	@OneToMany(mappedBy="user", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
@@ -96,6 +103,23 @@ public class User implements UserDetails, Serializable{
 	public void setTrustFactor(int trustFactor) {
 		this.trustFactor = trustFactor;
 	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 
 	public List<Quotation> getUserQuotationSubmissions() {
 		return userQuotationSubmissions;
@@ -162,6 +186,14 @@ public class User implements UserDetails, Serializable{
 		if (!userInterests.contains(candidate)){
 			userInterests.add(candidate);
 			candidate.addInterestedUser(this);
+		}
+	}
+	public void removeUserInterest(SubjectTag candidate){
+		if(userInterests.contains(candidate)){
+			userInterests.remove(candidate);
+			candidate.removeInterestedUser(this);
+			
+			
 		}
 	}
 

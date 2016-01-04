@@ -7,7 +7,7 @@ var authority;
 $(document).ready(function() {
 	if ($("#user a")[0].innerHTML){
 	user = $("#user a")[0].innerHTML;
-	console.log(user)
+	//console.log(user)
 	$(".user").css("display","block");
 	}else{
 		$(".login").css("display","block")
@@ -27,9 +27,9 @@ $(document).ready(function() {
 			error: ajaxerror
 		})
 		function successfulLogout(){
-			console.log("insuccesfn");
+			//console.log("insuccesfn");
 			$("#user a")[0].innerHTML="";
-			console.log($(".login input"))
+			//console.log($(".login input"))
 			
 			user=null;
 			$(".user").css("display","none");
@@ -127,7 +127,7 @@ $(document).ready(function() {
 				$(".user").css("display","block")
 				//$("#menu ul:first-of-type").append($("<li id=\"user\"><a>"+data.name+"</a></li>"))
 				user=data.name;
-				console.log(data);
+				//console.log(data);
 				user.id=data.id;
 				//link.html(foo.name)
 				//console.log(data.name);

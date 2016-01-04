@@ -6,7 +6,7 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-6 col-xs-12">
+			<div class="col-sm-6 col-xs-12" onClick="history.go(0)">
 				<img alt="quill and still for inkpot" src="/Quotes/FrontEnd/images/stills.svg">
 				<span>The Quill Distilled</span>
 			</div>
@@ -67,8 +67,6 @@
 			<li id="user" class="user"><a><c:if test="${!user.equals('anonymousUser')}" >${user.username}</c:if></a>
 			<ul>
 				<li><a id="homebtn">Home</a></li>
-				<li><a>Account Summary</a></li>
-				<li><a>Interests</a></li>
 				<li><a id="signoutbtn">Sign Out</a></li>
 			</ul>
 			</li>

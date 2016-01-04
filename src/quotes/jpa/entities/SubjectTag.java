@@ -65,6 +65,11 @@ public class SubjectTag implements Serializable {
 			interestedUsers.add(candidate);
 		}
 	}
+	public void removeInterestedUser(User candidate){
+		if (interestedUsers.contains(candidate)){
+			interestedUsers.remove(candidate);
+		}
+	}
 
 	public List<Quotation> getTaggedQuotes() {
 		return taggedQuotes;
